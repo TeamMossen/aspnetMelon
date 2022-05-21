@@ -10,6 +10,12 @@ namespace Domain;
 
 public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
