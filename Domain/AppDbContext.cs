@@ -16,6 +16,7 @@ public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
 
     }
 
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

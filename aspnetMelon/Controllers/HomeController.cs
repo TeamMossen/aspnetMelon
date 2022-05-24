@@ -1,12 +1,16 @@
 ﻿using aspnetMelon.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Domain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace aspnetMelon.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+
+
 
     public HomeController(ILogger<HomeController> logger)
     {

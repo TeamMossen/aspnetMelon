@@ -12,7 +12,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = false;
+});
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -35,6 +48,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

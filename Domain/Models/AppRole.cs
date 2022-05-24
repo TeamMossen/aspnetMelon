@@ -1,3 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class AppRole : IdentityRole<int> { }
+public class AppRole : IdentityRole<int>
+{
+
+}
