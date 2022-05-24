@@ -41,7 +41,7 @@ namespace Domain.Models
         [Required(ErrorMessage = "Please enter phone number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; } = default!;
-        public List<OrderDetail> OrderDetails { get; set; } = default!;
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
 
         [BindNever]
         [ScaffoldColumn(false)]
