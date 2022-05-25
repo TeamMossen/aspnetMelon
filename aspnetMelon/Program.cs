@@ -1,3 +1,6 @@
+global using Service.Services;
+global using Service.Models;
+global using aspnetMelon.ViewModels;
 using Domain;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -56,4 +60,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureDeleted();
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+}
 app.Run();

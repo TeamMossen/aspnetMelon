@@ -3,28 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
+using Service.Services;
 
 namespace aspnetMelon.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IProductService _productService;
 
-
-
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IProductService productService)
     {
         _logger = logger;
+        _productService = productService;
     }
 
     public IActionResult Index()
     {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
+        var homeViewModel = new HomeViewModel { ProductsOnSale = _productService.GetProductsOnSale() };
+        return View(homeViewModel);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

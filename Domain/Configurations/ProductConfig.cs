@@ -41,7 +41,7 @@ namespace Domain.Configurations
                         Description = "LG OLED TV är en glädje att se. Självlysande pixlar ger en häpnadsväckande bildkvalitet och en mängd designmöjligheter, och de senaste banbrytande teknikerna tar upplevelserna till nya oöverträffade höjder. Allt du redan älskar med TV - på en ny och högre nivå.",
                         CategoryId = 3,
                         Stock = 55,
-                        IsOnSale = false,
+                        IsOnSale = true,
                         Price = 15790,
                         ImageThumbnailUrl = "\\Images\\lg-tv.jpg",
                         ImageUrl = "\\Images\\lg-tv.jpg"
@@ -65,7 +65,7 @@ namespace Domain.Configurations
                         Description = "TP-link Deco M5 är ett paket med Wireless AC-repeatrar som tillsammans kan täcka upp till 400 m² med ett enda wifi-nätverk. Ansluts direkt till fiberanslutning eller till ett befintligt modem eller router.",
                         CategoryId = 2,
                         Stock = 550,
-                        IsOnSale = false,
+                        IsOnSale = true,
                         Price = 2589,
                         ImageThumbnailUrl = "\\Images\\deco-m5.jpg",
                         ImageUrl = "\\Images\\deco-m5.jpg"
@@ -101,7 +101,7 @@ namespace Domain.Configurations
                         Description = "Med data och erfarenheter från tusentals reparationsguider och demonteringar har iFixit sammanställt ett komplett vertygskit för alla typer av reparationer – från gamla vintage-konsoler till moderna Apple-datorer och surfplattor. Innehåller bland annat 64 bits i stål samt alla verktyg som behövs för att t.ex. lossa fastlimmade skärmar och batterier och byta ut olika komponenter. Inkluderar special-bits för bl.a. Apple-enheter, spelkonsoler och kaffemaskiner. Används av allt ifrån NASA till NSA och Edward Snowden.",
                         CategoryId = 1,
                         Stock = 5000,
-                        IsOnSale = false,
+                        IsOnSale = true,
                         Price = 599,
                         ImageThumbnailUrl = "\\Images\\ifixit.jpg",
                         ImageUrl = "\\Images\\ifixit.jpg"
