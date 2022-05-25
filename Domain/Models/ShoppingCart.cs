@@ -9,6 +9,6 @@ namespace Domain.Models
     public class ShoppingCart
     {
         public string ShoppingCartId { get; set; } = default!;
-        public ICollection<ShoppingCartItem>? ShoppingCartItems { get; set; }
+        public ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }
