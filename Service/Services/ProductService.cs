@@ -13,6 +13,16 @@ public class ProductService : IProductService
         _appContext = appContext;
     }
 
+
+    public IEnumerable<ProductDto> GetProducts(int page, int pageSize)
+    {
+        var pageParameters = new PageParameters(page, pageSize);
+
+        return _appContext.Products.Select(p => (ProductDto)p)
+            .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+            .Take(pageParameters.PageSize);
+    }
+
     public IEnumerable<ProductDto> GetProductsOnSale() 
         => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
 
