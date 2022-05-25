@@ -6,6 +6,6 @@ public record CategoryDto(int CategoryId, string CategoryName, string CategoryDe
 {
     
 
-    public static implicit operator CategoryDto(Category? category) =>
-        category is null ? new CategoryDto(0, "","",new List<ProductDto>()) : new (category.CategoryId,category.CategoryName,category.CategoryDescription, category.Products?.Select(p => (ProductDto)p).ToList());
+    public static implicit operator CategoryDto(Category category) =>
+        /*category is null ? new CategoryDto(0, "","",new List<ProductDto>()) :*/ new (category.CategoryId,category.CategoryName,category.CategoryDescription, null/*category.Products?.Select(p => (ProductDto)p).ToList()*/);
 }
