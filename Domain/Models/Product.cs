@@ -15,7 +15,7 @@ namespace Domain.Models
         public string ImageUrl { get; set; } = default!;
         public string ImageThumbnailUrl { get; set; } = default!;
         public bool IsOnSale { get; set; } 
-        public bool IsInStock { get; set; }
+        public int Stock { get; set; }
         public int CategoryId { get; set; } 
         public Category Category { get; set; } = default!;
 
