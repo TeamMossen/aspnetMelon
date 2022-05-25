@@ -17,7 +17,7 @@ namespace Domain.Models
         public bool IsOnSale { get; set; } 
         public int Stock { get; set; }
         public int CategoryId { get; set; } 
-        public Category Category { get; set; } = default!;
+        public virtual Category Category { get; set; } = default!;
 
     }
 }
