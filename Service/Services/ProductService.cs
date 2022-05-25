@@ -13,7 +13,7 @@ public class ProductService : IProductService
         _appContext = appContext;
     }
 
-    public IEnumerable<ProductDto> GetProductsOnSale() //.Include(p => p.Category)
+    public IEnumerable<ProductDto> GetProductsOnSale() 
         => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
 
     public ProductDto GetProductById(int id) 
