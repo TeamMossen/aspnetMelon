@@ -25,7 +25,7 @@ public class ProductService : IProductService
 
     public ProductDto GetProductById(int id)
     {
-        return _appContext.Products.Find(id);
+        return _appContext.Products.Include(p => p.Category).First(x => x.ProductId == id);
     }
     // => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
 }
