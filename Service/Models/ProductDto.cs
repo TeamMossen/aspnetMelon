@@ -8,5 +8,5 @@ public record ProductDto
 {
     public static implicit operator ProductDto(Product product) =>
         new(product.ProductId, product.Name, product.Description, product.Price, product.ImageUrl,
-            product.ImageThumbnailUrl, product.IsOnSale, product.Stock, product.Category);
+            product.ImageThumbnailUrl, product.IsOnSale, product.Stock, (CategoryDto)product.Category);
 }
