@@ -11,6 +11,6 @@ namespace Domain.Models
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = default!;
         public string CategoryDescription { get; set; } = default!;
-        public ICollection<Product>? Products { get; set; }
+        public virtual ICollection<Product>? Products { get; set; }
     }
 }

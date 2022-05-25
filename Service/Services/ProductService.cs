@@ -14,18 +14,8 @@ public class ProductService : IProductService
     }
 
     public IEnumerable<ProductDto> GetProductsOnSale() //.Include(p => p.Category)
-    {
-        var e = _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category);
+        => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
 
-        var s = e.Select(p => (ProductDto) p).ToList();
-
-        return s;
-        //return new List<ProductDto>();
-    }
-
-    public ProductDto GetProductById(int id)
-    {
-        return _appContext.Products.Include(p => p.Category).First(x => x.ProductId == id);
-    }
-    // => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
+    public ProductDto GetProductById(int id) 
+        => _appContext.Products.Where(x => x.ProductId == id).Include(p => p.Category).First();
 }
