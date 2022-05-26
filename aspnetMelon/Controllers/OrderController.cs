@@ -25,16 +25,16 @@ public class OrderController : Controller
     public IActionResult Checkout(Order order)
     {
         var user = this.User;
-        _shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
+        //_shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
 
-        if (_shoppingCart.ShoppingCartItems.Count == 0)
+        if (_shoppingCartService.GetShoppingCartItems(user).Count == 0)
         {
-            ModelState.AddModelError("", "Youe cart is empty");
+            ModelState.AddModelError("", "Your cart is empty!");
         }
         if (ModelState.IsValid)
         {
-            _orderRepository.CreatOrder(order);
-            _shoppingCart.ClearCart();
+            //_orderRepository.CreatOrder(order);
+            _shoppingCartService.ClearCart(user);
             return RedirectToAction("CheckoutComplete");
         }
 

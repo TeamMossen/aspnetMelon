@@ -39,13 +39,13 @@ public class ShoppingCartController : Controller
         return RedirectToAction("Index");
     }
 
-    public RedirectToActionResult RemoveFromShoppingCar(int productId)
+    public RedirectToActionResult RemoveFromShoppingCart(int productId)
     {
        // var selectedCandy = _candyRepositoyr.GetAllCandy.FirstOrDefault(c => c.CandyId == candyId);
 
         //if (selectedCandy != null)
         //{
-            _shoppingCartService.RemoveFromCart(productId);
+            _shoppingCartService.RemoveFromCart(this.User, productId);
         //}
 
         return RedirectToAction("Index");
@@ -53,7 +53,7 @@ public class ShoppingCartController : Controller
 
     public RedirectToActionResult ClearCart()
     {
-        _shoppingCartService.ClearCart();
+        _shoppingCartService.ClearCart(this.User);
         return RedirectToAction("Index");
     }
 }

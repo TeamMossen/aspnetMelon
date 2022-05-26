@@ -7,9 +7,9 @@ public interface IShoppingCartService
 {
     ShoppingCart GetCart(ClaimsPrincipal userClaim);
     void AddToCart(int productId, int amount, ClaimsPrincipal userClaim);
-    void RemoveFromCart(int productId);
+    void RemoveFromCart(ClaimsPrincipal userClaim, int productId);
     List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim);
     void ClearCart(ClaimsPrincipal userClaim);
     decimal GetShoppingCartTotal();
-    void SetShoppingCartItems(IEnumerable<ShoppingCart> shoppingCartItems);
+    void SetShoppingCartItems(IEnumerable<ShoppingCartItem> shoppingCartItems);
 }
