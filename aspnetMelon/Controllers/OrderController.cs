@@ -24,8 +24,8 @@ public class OrderController : Controller
     [HttpPost]
     public IActionResult Checkout(Order order)
     {
-        _shoppingCartService.SetShoppingCartItems()
-        _shoppingCart.ShoppingCartItems = _shoppingCartService.GetShoppingCartItems();
+        var user = this.User;
+        _shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user));
 
         if (_shoppingCart.ShoppingCartItems.Count == 0)
         {
