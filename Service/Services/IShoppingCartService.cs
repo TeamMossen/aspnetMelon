@@ -9,7 +9,7 @@ public interface IShoppingCartService
     void AddToCart(int productId, int amount, ClaimsPrincipal userClaim);
     void RemoveFromCart(int productId);
     List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim);
-    void ClearCart();
+    void ClearCart(ClaimsPrincipal userClaim);
     decimal GetShoppingCartTotal();
     void SetShoppingCartItems(IEnumerable<ShoppingCart> shoppingCartItems);
 }
