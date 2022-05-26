@@ -10,9 +10,9 @@ namespace aspnetMelon.Controllers
         private readonly IOrderService _orderService;
         private readonly ShoppingCart _shoppingCart;
 
-        public OrderController(IOrderService orderRepository, ShoppingCart shoppingCart)
+        public OrderController(IOrderService orderService, ShoppingCart shoppingCart)
         {
-            _orderService = orderRepository;
+            _orderService = orderService;
             _shoppingCart = shoppingCart;
         }
 
