@@ -94,13 +94,14 @@ public class ShoppingCartService : IShoppingCartService
         throw new NotImplementedException();
     }
 
-    public void SetShoppingCartItems(IEnumerable<ShoppingCart> shoppingCartItems)
+    public void SetShoppingCartItems(IEnumerable<ShoppingCartItem> shoppingCartItems)
     {
             
     }
 
-    public void RemoveFromCart(int productId)
+    public void RemoveFromCart(ClaimsPrincipal userClaim, int productId)
     {
-        
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        user.ShoppingCart
     }
 }

@@ -25,7 +25,7 @@ public class OrderController : Controller
     public IActionResult Checkout(Order order)
     {
         var user = this.User;
-        _shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user));
+        _shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
 
         if (_shoppingCart.ShoppingCartItems.Count == 0)
         {
