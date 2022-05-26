@@ -6,81 +6,90 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
-namespace Service.Services
+namespace Service.Services;
+
+public class ShoppingCartService : IShoppingCartService
 {
-    public class ShoppingCartService : IShoppingCartService
+    private readonly AppDbContext _appContext;
+    private readonly ISession _session;
+    private readonly UserManager<AppUser> _userManager;
+
+    public ShoppingCartService(AppDbContext appContext, ISession session, UserManager<AppUser> userManager)
     {
-        private readonly AppDbContext _appContext;
-        private readonly ShoppingCart _shoppingCart;
+        _appContext = appContext;
+        _session = session;
+        _userManager = userManager;
+    }
+    //public ShoppingCart GetCart(ClaimsPrincipal claimsPrincipal /*IServiceProvider services*/)
+    //{
+    //   // ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
-        public ShoppingCartService(AppDbContext appContext, ShoppingCart shoppingCart)
+    //   // string cartId = _session.GetString("CartId") ?? Guid.NewGuid().ToString();
+    //   // _session.SetString("CartId", cartId);
+
+    //    return new ShoppingCart() { ShoppingCartId = cartId };
+    //}
+
+    public void AddToCart(Product product, int amount, ClaimsPrincipal userClaim)
+    {
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
+            (s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == user.ShoppingCartId);
+
+        if (shoppingCartItem == null)
         {
-            _appContext = appContext;
-            _shoppingCart = shoppingCart;
-        }
-        public static ShoppingCart StaticGetCart(IServiceProvider services)
-        {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-
-            var context = services.GetService<AppDbContext>();
-            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-            session.SetString("CartId", cartId);
-
-            return new ShoppingCart() { ShoppingCartId = cartId };
-        }
-
-        public void AddToCart(Product product, int amount)
-        {
-            var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
-                                 (s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCart.ShoppingCartId);
-
-            if (shoppingCartItem == null)
+            shoppingCartItem = new ShoppingCartItem
             {
-                shoppingCartItem = new ShoppingCartItem
-                {
-                    ShoppingCartId = ShoppingCartId,
-                    Candy = candy,
-                    Amount = amount,
-                };
+                ShoppingCartId = user.ShoppingCartId,
+                Product = product,
+                Amount = amount,
+            };
 
-                _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
-            }
-            else
-            {
-                shoppingCartItem.Amount++;
-            }
-
-            _appDbContext.SaveChanges();
+            _appContext.ShoppingCartItems.Add(shoppingCartItem);
         }
-
-        public void ClearCart()
+        else
         {
-            throw new NotImplementedException();
+            shoppingCartItem.Amount++;
         }
 
-        public ShoppingCart GetCart(IServiceProvider services)
-        {
-            return StaticGetCart(services);
-        }
+        _appContext.SaveChanges();
+    }
 
-        public ICollection<ShoppingCartItem> GetShoppingCartItems()
-        {
-            return _shoppingCart.ShoppingCartItems ?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
-                                                             (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
-                                                             (s => s.ProductId).ToList());
-        }
+    public void ClearCart()
+    {
+        throw new NotImplementedException();
+    }
 
-        public decimal GetShoppingCartTotal()
-        {
-            throw new NotImplementedException();
-        }
+    public List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim)
+    {
 
-        public int RemoveFromCart(Product product)
-        {
-            throw new NotImplementedException();
-        }
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+            
+        return user.ShoppingCart.ShoppingCartItems!.ToList();
+
+        //_shoppingCart.ShoppingCartItems.ToList();
+        //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
+        //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
+        //                                          (s => s.ProductId));
+    }
+
+    public decimal GetShoppingCartTotal()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetShoppingCartItems(IEnumerable<ShoppingCart> shoppingCartItems)
+    {
+            
+    }
+
+    public int RemoveFromCart(Product product)
+    {
+        throw new NotImplementedException();
     }
 }

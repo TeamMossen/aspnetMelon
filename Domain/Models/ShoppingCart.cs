@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models
+namespace Domain.Models;
+
+public class ShoppingCart
 {
-    public class ShoppingCart
-    {
-        public string ShoppingCartId { get; set; } = default!;
-        public ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
-    }
+    public int ShoppingCartId { get; set; }
+    public ICollection<ShoppingCartItem>? ShoppingCartItems { get; set; }
 }

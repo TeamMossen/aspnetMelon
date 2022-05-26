@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models
+namespace Domain.Models;
+
+public class ShoppingCartItem
 {
-    public class ShoppingCartItem
-    {
-        public int ShoppingCartItemId { get; set; }
-        public string ShoppingCartId { get; set; } = default!;
+    public int ShoppingCartItemId { get; set; }
+    public int ShoppingCartId { get; set; }
 
-        public int ProductId { get; set; }
-        public Product Product { get; set; } = default!;
-        public int Amount { get; set; }
+    public int ProductId { get; set; }
+    public Product Product { get; set; } = default!;
+    public int Amount { get; set; }
 
-    }
 }

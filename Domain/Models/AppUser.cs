@@ -5,6 +5,8 @@
 /// </summary>
 public class AppUser : IdentityUser<int>
 {
-    //User properties. 
+    public int ShoppingCartId { get; set; }
+
+    public ShoppingCart ShoppingCart { get; set; } = default!;
 
 }

@@ -1,14 +1,15 @@
-﻿using Domain.Models;
+﻿using System.Security.Claims;
+using Domain.Models;
 
-namespace Service.Services
+namespace Service.Services;
+
+public interface IShoppingCartService
 {
-    public interface IShoppingCartService
-    {
-        ShoppingCart GetCart(IServiceProvider services);
-        void AddToCart(Product product, int amount);
-        int RemoveFromCart(Product product);
-        List<ShoppingCartItem> GetShoppingCartItems();
-        void ClearCart();
-        decimal GetShoppingCartTotal();
-    }
+    //ShoppingCart GetCart(ClaimsPrincipal user);
+    void AddToCart(Product product, int amount, ClaimsPrincipal userClaim);
+    int RemoveFromCart(Product product);
+    List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal user);
+    void ClearCart();
+    decimal GetShoppingCartTotal();
+    void SetShoppingCartItems(IEnumerable<ShoppingCart> shoppingCartItems);
 }

@@ -2,48 +2,48 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace aspnetMelon.Controllers
+namespace aspnetMelon.Controllers;
+
+[Authorize]
+public class OrderController : Controller
 {
-    [Authorize]
-    public class OrderController : Controller
+    private readonly IOrderService _orderService;
+    private readonly IShoppingCartService _shoppingCartService;
+
+    public OrderController(IOrderService orderService, IShoppingCartService shoppingCartService)
     {
-        private readonly IOrderService _orderService;
-        private readonly ShoppingCart _shoppingCart;
+        _orderService = orderService;
+        _shoppingCartService = shoppingCartService;
+    }
 
-        public OrderController(IOrderService orderService, ShoppingCart shoppingCart)
+    public IActionResult Checkout()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Checkout(Order order)
+    {
+        _shoppingCartService.SetShoppingCartItems()
+        _shoppingCart.ShoppingCartItems = _shoppingCartService.GetShoppingCartItems();
+
+        if (_shoppingCart.ShoppingCartItems.Count == 0)
         {
-            _orderService = orderService;
-            _shoppingCart = shoppingCart;
+            ModelState.AddModelError("", "Youe cart is empty");
+        }
+        if (ModelState.IsValid)
+        {
+            _orderRepository.CreatOrder(order);
+            _shoppingCart.ClearCart();
+            return RedirectToAction("CheckoutComplete");
         }
 
-        public IActionResult Checkout()
-        {
-            return View();
-        }
+        return View(order);
+    }
 
-        [HttpPost]
-        public IActionResult Checkout(Order order)
-        {
-            _shoppingCart.ShoppingCartItems = _shoppingCart.GetShoppingCartItems();
-
-            if (_shoppingCart.ShoppingCartItems.Count == 0)
-            {
-                ModelState.AddModelError("", "Youe cart is empty");
-            }
-            if (ModelState.IsValid)
-            {
-                _orderRepository.CreatOrder(order);
-                _shoppingCart.ClearCart();
-                return RedirectToAction("CheckoutComplete");
-            }
-
-            return View(order);
-        }
-
-        public IActionResult CheckoutComplete()
-        {
-            ViewBag.CheckoutCompleteMessage = "Thank you for your order. Enjoy your candy";
-            return View();
-        }
+    public IActionResult CheckoutComplete()
+    {
+        ViewBag.CheckoutCompleteMessage = "Thank you for your order. Enjoy your candy";
+        return View();
     }
 }

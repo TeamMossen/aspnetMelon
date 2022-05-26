@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace aspnetMelon.Controllers
+namespace aspnetMelon.Controllers;
+
+public class ProductController : Controller
 {
-    public class ProductController : Controller
+    private readonly IProductService _productService;
+
+    public ProductController(IProductService productService)
     {
-        private readonly IProductService _productService;
+        _productService = productService;
+    }
 
-        public ProductController(IProductService productService)
-        {
-            _productService = productService;
-        }
-
-        public IActionResult Details(int id)
-        {
-            var product = _productService.GetProductById(id);
-            if (product is null)
-                return NotFound();
-            return View(product);
-        }
+    public IActionResult Details(int id)
+    {
+        var product = _productService.GetProductById(id);
+        if (product is null)
+            return NotFound();
+        return View(product);
     }
 }

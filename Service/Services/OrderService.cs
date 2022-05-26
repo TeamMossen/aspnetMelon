@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Services
+namespace Service.Services;
+
+public class OrderService : IOrderService
 {
-    public class OrderService : IOrderService
-    {
-    }
 }

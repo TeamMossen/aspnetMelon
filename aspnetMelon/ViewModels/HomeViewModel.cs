@@ -1,9 +1,8 @@
 ﻿using Service.Models;
 
-namespace aspnetMelon.ViewModels
+namespace aspnetMelon.ViewModels;
+
+public class HomeViewModel
 {
-    public class HomeViewModel
-    {
-        public IEnumerable<ProductDto> ProductsOnSale { get; set; }
-    }
+    public IEnumerable<ProductDto> ProductsOnSale { get; set; }
 }
