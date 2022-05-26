@@ -7,7 +7,7 @@ public interface IShoppingCartService
 {
     ShoppingCart GetCart(ClaimsPrincipal userClaim);
     void AddToCart(int productId, int amount, ClaimsPrincipal userClaim);
-    int RemoveFromCart(Product product);
+    void RemoveFromCart(int productId);
     List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim);
     void ClearCart();
     decimal GetShoppingCartTotal();
