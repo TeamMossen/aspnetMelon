@@ -106,6 +106,17 @@ public class ShoppingCartService : IShoppingCartService
     public void RemoveFromCart(ClaimsPrincipal userClaim, int productId)
     {
         var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
-        user.ShoppingCart
+        var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
+                     (s => s.ProductId == productId && s.ShoppingCartId == user.ShoppingCartId);
+        if (shoppingCartItem is not null)
+        {
+            if (shoppingCartItem.Amount > 1)
+                shoppingCartItem.Amount--;
+            else
+            {
+                _appContext.ShoppingCartItems.Remove(shoppingCartItem);
+            }
+        }
+        _appContext.SaveChanges();
     }
 }
