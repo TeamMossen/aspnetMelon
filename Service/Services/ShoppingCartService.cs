@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace Service.Services
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly AppDbContext _appContext;
+        private readonly ShoppingCart _shoppingCart;
 
-        public ShoppingCartService(AppDbContext appContext)
+        public ShoppingCartService(AppDbContext appContext, ShoppingCart shoppingCart)
         {
             _appContext = appContext;
+            _shoppingCart = shoppingCart;
         }
         public static ShoppingCart StaticGetCart(IServiceProvider services)
         {
@@ -63,9 +66,11 @@ namespace Service.Services
             return StaticGetCart(services);
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public ICollection<ShoppingCartItem> GetShoppingCartItems()
         {
-            throw new NotImplementedException();
+            return _shoppingCart.ShoppingCartItems ?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
+                                                             (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
+                                                             (s => s.ProductId).ToList());
         }
 
         public decimal GetShoppingCartTotal()
