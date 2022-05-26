@@ -25,8 +25,13 @@ public class ShoppingCartService : IShoppingCartService
         _session = session;
         _userManager = userManager;
     }
-    //public ShoppingCart GetCart(ClaimsPrincipal claimsPrincipal /*IServiceProvider services*/)
-    //{
+
+    public ShoppingCart GetCart(ClaimsPrincipal userClaim /*IServiceProvider services*/)
+    {
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        
+        return user.ShoppingCart;
+    }
     //   // ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
     //   // string cartId = _session.GetString("CartId") ?? Guid.NewGuid().ToString();
@@ -35,9 +40,26 @@ public class ShoppingCartService : IShoppingCartService
     //    return new ShoppingCart() { ShoppingCartId = cartId };
     //}
 
-    public void AddToCart(Product product, int amount, ClaimsPrincipal userClaim)
+    public List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim)
+    {
+
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+
+        return user.ShoppingCart.ShoppingCartItems!.ToList();
+
+        //_shoppingCart.ShoppingCartItems.ToList();
+        //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
+        //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
+        //                                          (s => s.ProductId));
+    }
+    public void AddToCart(int productId, int amount, ClaimsPrincipal userClaim)
     {
         var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+
+        var product = _appContext.Products.Find(productId);
+
+        if (product == null) return;
+
         var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
             (s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == user.ShoppingCartId);
 
@@ -65,18 +87,7 @@ public class ShoppingCartService : IShoppingCartService
         throw new NotImplementedException();
     }
 
-    public List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim)
-    {
 
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
-            
-        return user.ShoppingCart.ShoppingCartItems!.ToList();
-
-        //_shoppingCart.ShoppingCartItems.ToList();
-        //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
-        //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
-        //                                          (s => s.ProductId));
-    }
 
     public decimal GetShoppingCartTotal()
     {
@@ -88,8 +99,8 @@ public class ShoppingCartService : IShoppingCartService
             
     }
 
-    public int RemoveFromCart(Product product)
+    public void RemoveFromCart(int productId)
     {
-        throw new NotImplementedException();
+        
     }
 }

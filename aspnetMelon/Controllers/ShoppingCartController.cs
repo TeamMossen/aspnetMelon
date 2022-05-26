@@ -20,42 +20,42 @@ public class ShoppingCartController : Controller
 
         var shoppingCartViewModel = new ShoppingCartViewModel
         {
-            ShoppingCart = _shoppingCart,
-            ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
+            ShoppingCart = _shoppingCartService.GetCart(this.User),
+            ShoppingCartTotal = _shoppingCartService.GetShoppingCartTotal()
         };
-
+        
         return View(shoppingCartViewModel);
     }
 
-    public RedirectToActionResult AddToShoppingCart(int candyId)
+    public RedirectToActionResult AddToShoppingCart(int productId)
     {
-        var selectedCandy = _candyRepositoyr.GetAllCandy.FirstOrDefault(c => c.CandyId == candyId);
+        //var selectedCandy = _candyRepositoyr.GetAllCandy.FirstOrDefault(c => c.CandyId == candyId);
 
-        if (selectedCandy != null)
-        {
-            _shoppingCart.AddToCart(selectedCandy, 1);
-        }
+        //if (selectedCandy != null)
+        //{
+        _shoppingCartService.AddToCart(productId, 1, User);
+       // }
+       
+        return RedirectToAction("Index");
+    }
+
+    public RedirectToActionResult RemoveFromShoppingCar(int productId)
+    {
+       // var selectedCandy = _candyRepositoyr.GetAllCandy.FirstOrDefault(c => c.CandyId == candyId);
+
+        //if (selectedCandy != null)
+        //{
+            _shoppingCartService.RemoveFromCart(productId);
+        //}
 
         return RedirectToAction("Index");
     }
 
-    public RedirectToActionResult RemoveFromShoppingCar(int candyId)
+    public RedirectToActionResult ClearCart()
     {
-        var selectedCandy = _candyRepositoyr.GetAllCandy.FirstOrDefault(c => c.CandyId == candyId);
-
-        if (selectedCandy != null)
-        {
-            _shoppingCart.RemoveFromCart(selectedCandy);
-        }
-
-        return RedirectToAction("Index");
-    }
-
-    public RedirectToActionResult clearCart()
-    {
-        _shoppingCart.ClearCart();
+        _shoppingCartService.ClearCart();
         return RedirectToAction("Index");
     }
 }
 
-}
+
