@@ -82,9 +82,13 @@ public class ShoppingCartService : IShoppingCartService
         _appContext.SaveChanges();
     }
 
-    public void ClearCart()
+    public void ClearCart(ClaimsPrincipal userClaim)
     {
-        throw new NotImplementedException();
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+
+        user.ShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
+
+        _userManager.UpdateAsync(user);
     }
 
 
