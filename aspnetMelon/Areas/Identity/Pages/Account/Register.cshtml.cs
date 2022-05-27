@@ -117,7 +117,7 @@ namespace aspnetMelon.Areas.Identity.Pages.Account
 
                 user.ShoppingCart = new ShoppingCart
                 {
-                    ShoppingCartItems = new List<ShoppingCartItem>(){new() {Amount = 1,ProductId = 1}}
+                    ShoppingCartItems = new List<ShoppingCartItem>()/*{new() {Amount = 1,ProductId = 1}}*/
                 };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

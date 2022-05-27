@@ -1,12 +1,12 @@
 ﻿@model OrderDto
 
     <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
-        <h4>You're one step away from ordering awesome candy</h4>
+        <h4>Enter your details</h4>
 
         <div asp-validation-summary="All" class="danger"></div>
 
         <div class="form-group">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <label asp-for="FirstName" class="col-md-2 control-label">First Name</label>
                 <div class="col-md-5">
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="danger"></span>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <label asp-for="LastName" class="col-md-2 control-label">Last Name</label>
             <div class="col-md-5">
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="danger"></span>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="ZipCode" class="col-md-2 control-label"></label>
+            <label asp-for="ZipCode" class="col-md-2 control-label">Zip Code</label>
             <div class="col-md-5">
                 <input asp-for="ZipCode" class="form-control" />
                 <span asp-validation-for="ZipCode" class="danger"></span>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
+            <label asp-for="PhoneNumber" class="col-md-2 control-label">Phone Number</label>
             <div class="col-md-5">
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="danger"></span>

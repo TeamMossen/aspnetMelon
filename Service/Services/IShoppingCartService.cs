@@ -10,6 +10,6 @@ public interface IShoppingCartService
     void RemoveFromCart(ClaimsPrincipal userClaim, int productId);
     List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim);
     void ClearCart(ClaimsPrincipal userClaim);
-    decimal GetShoppingCartTotal();
+    decimal GetShoppingCartTotal(ClaimsPrincipal userClaim);
     void SetShoppingCartItems(IEnumerable<ShoppingCartItem> shoppingCartItems);
 }

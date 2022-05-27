@@ -21,7 +21,7 @@ public class ShoppingCartController : Controller
         var shoppingCartViewModel = new ShoppingCartViewModel
         {
             ShoppingCart = _shoppingCartService.GetCart(this.User),
-            ShoppingCartTotal = 999//_shoppingCartService.GetShoppingCartTotal()
+            ShoppingCartTotal = _shoppingCartService.GetShoppingCartTotal(this.User)
         };
         
         return View(shoppingCartViewModel);

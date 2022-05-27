@@ -97,9 +97,16 @@ public class ShoppingCartService : IShoppingCartService
 
 
 
-    public decimal GetShoppingCartTotal()
+    public decimal GetShoppingCartTotal(ClaimsPrincipal userClaim)
     {
-        throw new NotImplementedException();
+        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+
+        var total = _appContext.ShoppingCartItems
+            .Where(c => c.ShoppingCartId == user.ShoppingCartId).Select
+            (c => c.Product.Price * c.Amount).Sum();
+
+        return total;
+
     }
 
     public void SetShoppingCartItems(IEnumerable<ShoppingCartItem> shoppingCartItems)
@@ -121,6 +128,6 @@ public class ShoppingCartService : IShoppingCartService
                 _appContext.ShoppingCartItems.Remove(shoppingCartItem);
             }
         }
-        _appContext.SaveChanges();
+        _appContext.SaveChanges();        
     }
 }
