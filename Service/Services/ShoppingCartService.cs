@@ -29,7 +29,9 @@ public class ShoppingCartService : IShoppingCartService
     public ShoppingCart GetCart(ClaimsPrincipal userClaim /*IServiceProvider services*/)
     {
         var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
-        
+        user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
+
         return user.ShoppingCart;
     }
     //   // ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
@@ -44,6 +46,8 @@ public class ShoppingCartService : IShoppingCartService
     {
 
         var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
 
         return user.ShoppingCart.ShoppingCartItems!.ToList();
 

@@ -15,7 +15,7 @@
         @foreach(var item in Model.ShoppingCart.ShoppingCartItems)
         {
             <tr>
-                <td class="text-left"><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCar" 
+                <td class="text-left"><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" 
                                          asp-route-candyId="@item.Product.ProductId" alt="">Decrease Amount</a></td>
                 <td class="text-center">@item.Amount</td>
                 <td class="text-left">@item.Product.Name</td>

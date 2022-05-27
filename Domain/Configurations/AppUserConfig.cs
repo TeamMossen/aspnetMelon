@@ -12,5 +12,6 @@ public class AppUserConfig : IEntityTypeConfiguration<AppUser>
        // builder.Property(u => u.ShoppingCartId).HasDefaultValue(0);
 
         builder.Navigation(e => e.ShoppingCart).AutoInclude();
+      
     }
 }
