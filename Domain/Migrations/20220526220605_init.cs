@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Domain.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,32 +22,6 @@ namespace Domain.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,14 +60,15 @@ namespace Domain.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
+                name: "ShoppingCart",
                 columns: table => new
                 {
-                    ShoppingCartId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.ShoppingCartId);
+                    table.PrimaryKey("PK_ShoppingCart", x => x.ShoppingCartId);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,6 +89,120 @@ namespace Domain.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsOnSale = table.Column<bool>(type: "bit", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_ShoppingCart_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCart",
+                        principalColumn: "ShoppingCartId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
+                columns: table => new
+                {
+                    OrderDetailId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartItems",
+                columns: table => new
+                {
+                    ShoppingCartItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartItems", x => x.ShoppingCartItemId);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartItems_ShoppingCart_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCart",
+                        principalColumn: "ShoppingCartId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -202,87 +291,6 @@ namespace Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsOnSale = table.Column<bool>(type: "bit", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderDetails",
-                columns: table => new
-                {
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCartItems",
-                columns: table => new
-                {
-                    ShoppingCartItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ShoppingCartId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCartItems", x => x.ShoppingCartItemId);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCartItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCartItems_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "ShoppingCartId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -310,12 +318,12 @@ namespace Domain.Migrations
                 {
                     { 1, 3, "DT 770 PRO är en sluten dynamisk hörlurar av exceptionell kvalitet som lämpar sig för de mest krävande professionella och audiofiler applikationer. Komfort och exakt prestanda gör DT 770 PRO perfekt hörlurar för inspelningsstudior, produktion eller sändning.", "\\Images\\dt770pro.jpg", "\\Images\\dt770pro.jpg", false, "Beyerdynamics DT770 Pro 80", 1749m, 5 },
                     { 2, 3, "Arc utnyttjar Sonos kraftfulla nya mjukvaruplattform för att leverera Sonos mest omslutande hemmabioupplevelse hittills.", "\\Images\\sonos-arc.jpg", "\\Images\\sonos-arc.jpg", false, "Sonos ARC Hemmabio paket", 18990m, 420 },
-                    { 3, 3, "LG OLED TV är en glädje att se. Självlysande pixlar ger en häpnadsväckande bildkvalitet och en mängd designmöjligheter, och de senaste banbrytande teknikerna tar upplevelserna till nya oöverträffade höjder. Allt du redan älskar med TV - på en ny och högre nivå.", "\\Images\\lg-tv.jpg", "\\Images\\lg-tv.jpg", false, "LG 65\" OLED 4K TV OLED65C1", 15790m, 55 },
+                    { 3, 3, "LG OLED TV är en glädje att se. Självlysande pixlar ger en häpnadsväckande bildkvalitet och en mängd designmöjligheter, och de senaste banbrytande teknikerna tar upplevelserna till nya oöverträffade höjder. Allt du redan älskar med TV - på en ny och högre nivå.", "\\Images\\lg-tv.jpg", "\\Images\\lg-tv.jpg", true, "LG 65\" OLED 4K TV OLED65C1", 15790m, 55 },
                     { 4, 2, "Nas ur Synologys populära DS-serie som passar bra i både hemmiljö och mindre företag. Har plats för två hårddiskar med hot swap-stöd som kan konfigureras med bl.a. Raid 1 (ger dubbel lagringsäkerhet och påverkas inte om en disk fallerar).", "\\Images\\synology-ds220.jpg", "\\Images\\synology-ds220.jpg", false, "Synology DS220+ Nas för 2 hårddiskar", 3890m, 99 },
-                    { 5, 2, "TP-link Deco M5 är ett paket med Wireless AC-repeatrar som tillsammans kan täcka upp till 400 m² med ett enda wifi-nätverk. Ansluts direkt till fiberanslutning eller till ett befintligt modem eller router.", "\\Images\\deco-m5.jpg", "\\Images\\deco-m5.jpg", false, "TP-link Deco M5 Mesh-system AC1300 3-pack", 2589m, 550 },
+                    { 5, 2, "TP-link Deco M5 är ett paket med Wireless AC-repeatrar som tillsammans kan täcka upp till 400 m² med ett enda wifi-nätverk. Ansluts direkt till fiberanslutning eller till ett befintligt modem eller router.", "\\Images\\deco-m5.jpg", "\\Images\\deco-m5.jpg", true, "TP-link Deco M5 Mesh-system AC1300 3-pack", 2589m, 550 },
                     { 6, 2, "Asus RT-AX55 är en Wifi 6-router som passar perfekt för dig som vill ha snabbt och stabilt wifi hemma med de senaste teknikerna. Genom att använda Wifi 6-standarden (802.11ax) kan routern ge upp till 1201 Mbps över 5 GHz bandet", "\\Images\\rt-ax55.jpg", "\\Images\\rt-ax55.jpg", false, "Asus RT-AX55 Trådlös router AX1800", 1290m, 55 },
                     { 7, 1, "Kraftfullt extrabatteri för laddning av mobil, surfplatta och andra USB-enheter. Kapacitet på 16000 mAh som räcker för att ladda upp en mobil ca 6 gånger. Utrustat med ficklampa, två USB-portar (totalt 2,1 A) och laddningsindikator.", "\\Images\\solcell-powerbank.jpg", "\\Images\\solcell-powerbank.jpg", false, "Linocell Powerbank med solcellsladdning 16000 mAh", 699m, 999 },
-                    { 8, 1, "Med data och erfarenheter från tusentals reparationsguider och demonteringar har iFixit sammanställt ett komplett vertygskit för alla typer av reparationer – från gamla vintage-konsoler till moderna Apple-datorer och surfplattor. Innehåller bland annat 64 bits i stål samt alla verktyg som behövs för att t.ex. lossa fastlimmade skärmar och batterier och byta ut olika komponenter. Inkluderar special-bits för bl.a. Apple-enheter, spelkonsoler och kaffemaskiner. Används av allt ifrån NASA till NSA och Edward Snowden.", "\\Images\\ifixit.jpg", "\\Images\\ifixit.jpg", false, "Ifixit Pro Tech Toolkit Reparationskit", 599m, 5000 },
+                    { 8, 1, "Med data och erfarenheter från tusentals reparationsguider och demonteringar har iFixit sammanställt ett komplett vertygskit för alla typer av reparationer – från gamla vintage-konsoler till moderna Apple-datorer och surfplattor. Innehåller bland annat 64 bits i stål samt alla verktyg som behövs för att t.ex. lossa fastlimmade skärmar och batterier och byta ut olika komponenter. Inkluderar special-bits för bl.a. Apple-enheter, spelkonsoler och kaffemaskiner. Används av allt ifrån NASA till NSA och Edward Snowden.", "\\Images\\ifixit.jpg", "\\Images\\ifixit.jpg", true, "Ifixit Pro Tech Toolkit Reparationskit", 599m, 5000 },
                     { 9, 1, "Galaxy S21 FE med en magiskt 6.4”-disaplay med 120 Hz-bilduppdatering för en oslagbar upplevelse när du scrollar igenom hemsidor, appar och spel. Stänk- och vattentålig design och med Gorilla Glass Victus för ett ännu starkare skydd mot repor. Fingeravtrycksläsare för säker och smidig upplåsning av telefonen och inloggning i kompatibla appar.", "\\Images\\galaxy-s21fe.jpg", "\\Images\\galaxy-s21fe.jpg", false, "Samsung Galaxy S21 FE 128 GB Svart", 8190m, 10000 },
                     { 10, 4, "Jimbee Tropical är en helt ny variant av Piel de Sapo, Corazón de Oro, med ett orange fruktkött. Sorten har ett mycket sött, saftigt och krispigt fruktkött med en tropisk smak.", "\\Images\\jimbee-tropical.jpg", "\\Images\\jimbee-tropical.jpg", false, "Jimbee Tropical", 49m, 1000000 },
                     { 11, 4, "Limelon är en ny melonsort med en fräsch smak av lime. Skalet är grönrandigt och fruktköttet grönvitt. Den har en hög halt av askorbinsyra och citronsyra men är även hög i sötma vilket ger en spännande smak. Passar bra i sallader, juice och smoothies. Testa den ihop med jordgubbar!", "\\Images\\limelon.jpg", "\\Images\\limelon.jpg", false, "Limelon", 39m, 5000 },
@@ -353,6 +361,11 @@ namespace Domain.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_ShoppingCartId",
+                table: "AspNetUsers",
+                column: "ShoppingCartId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -423,7 +436,7 @@ namespace Domain.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCarts");
+                name: "ShoppingCart");
 
             migrationBuilder.DropTable(
                 name: "Categories");

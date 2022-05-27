@@ -16,13 +16,13 @@ namespace Service.Services;
 public class ShoppingCartService : IShoppingCartService
 {
     private readonly AppDbContext _appContext;
-    private readonly ISession _session;
+    //private readonly ISession _session;
     private readonly UserManager<AppUser> _userManager;
 
-    public ShoppingCartService(AppDbContext appContext, ISession session, UserManager<AppUser> userManager)
+    public ShoppingCartService(AppDbContext appContext, UserManager<AppUser> userManager)
     {
         _appContext = appContext;
-        _session = session;
+        //_session = session;
         _userManager = userManager;
     }
 
