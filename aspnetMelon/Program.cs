@@ -5,6 +5,7 @@ using Domain;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Service.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 // connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -40,9 +41,11 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 #endregion
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 
 
@@ -77,7 +80,7 @@ app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
-    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureDeleted();
+    //scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureDeleted();
     scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
 }
 app.Run();

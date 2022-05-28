@@ -1,0 +1,9 @@
+﻿@model ProductsViewModel
+
+<h2>Products</h2>
+<div class="row">
+    @foreach(var product in Model.Products)
+    {
+        <partial name="_productCard" model="product" />
+    }
+</div>

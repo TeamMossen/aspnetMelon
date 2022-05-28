@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 
@@ -17,5 +18,17 @@ public class ProductController : Controller
         if (product is null)
             return NotFound();
         return View(product);
+    }
+
+    public IActionResult Products(int? categoryId = null)
+    {
+        var productViewModel = new ProductsViewModel()
+        {
+            Products = categoryId is not null
+                ? _productService.GetProductsByCategory(categoryId.Value)
+                : _productService.GetProducts(1, 20)
+        };
+
+        return View(productViewModel);
     }
 }

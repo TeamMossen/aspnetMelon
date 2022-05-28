@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 
@@ -20,8 +21,8 @@ public class ShoppingCartController : Controller
 
         var shoppingCartViewModel = new ShoppingCartViewModel
         {
-            ShoppingCart = _shoppingCartService.GetCart(this.User),
-            ShoppingCartTotal = _shoppingCartService.GetShoppingCartTotal(this.User)
+            ShoppingCart = _shoppingCartService.GetCart(),
+            ShoppingCartTotal = _shoppingCartService.GetShoppingCartTotal()
         };
         
         return View(shoppingCartViewModel);
@@ -33,7 +34,7 @@ public class ShoppingCartController : Controller
 
         //if (selectedCandy != null)
         //{
-        _shoppingCartService.AddToCart(productId, 1, User);
+        _shoppingCartService.AddToCart(productId, 1);
        // }
        
         return RedirectToAction("Index");
@@ -45,7 +46,7 @@ public class ShoppingCartController : Controller
 
         //if (selectedCandy != null)
         //{
-            _shoppingCartService.RemoveFromCart(this.User, productId);
+            _shoppingCartService.RemoveFromCart(productId);
         //}
 
         return RedirectToAction("Index");
@@ -53,7 +54,7 @@ public class ShoppingCartController : Controller
 
     public RedirectToActionResult ClearCart()
     {
-        _shoppingCartService.ClearCart(this.User);
+        _shoppingCartService.ClearCart();
         return RedirectToAction("Index");
     }
 }

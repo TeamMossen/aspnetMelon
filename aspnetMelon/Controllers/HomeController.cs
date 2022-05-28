@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
-using Service.Services;
+using Service.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 

@@ -1,14 +1,7 @@
 ﻿using Domain;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
 namespace Service.Services;
@@ -16,19 +9,23 @@ namespace Service.Services;
 public class ShoppingCartService : IShoppingCartService
 {
     private readonly AppDbContext _appContext;
-    //private readonly ISession _session;
-    private readonly UserManager<AppUser> _userManager;
 
-    public ShoppingCartService(AppDbContext appContext, UserManager<AppUser> userManager)
+    private readonly IUserService _userService;
+    //private readonly ISession _session;
+    //private readonly UserManager<AppUser> _userManager;
+
+    public ShoppingCartService(AppDbContext appContext, IUserService userService, UserManager<AppUser> userManager)
     {
         _appContext = appContext;
+        _userService = userService;
         //_session = session;
-        _userManager = userManager;
+        //_userManager = userManager;
     }
 
-    public ShoppingCart GetCart(ClaimsPrincipal userClaim /*IServiceProvider services*/)
+    public ShoppingCart GetCart()
     {
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
+
         user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
             .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
 
@@ -42,10 +39,10 @@ public class ShoppingCartService : IShoppingCartService
     //    return new ShoppingCart() { ShoppingCartId = cartId };
     //}
 
-    public List<ShoppingCartItem> GetShoppingCartItems(ClaimsPrincipal userClaim)
+    public List<ShoppingCartItem> GetShoppingCartItems()
     {
 
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
         user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
             .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
 
@@ -56,9 +53,9 @@ public class ShoppingCartService : IShoppingCartService
         //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
         //                                          (s => s.ProductId));
     }
-    public void AddToCart(int productId, int amount, ClaimsPrincipal userClaim)
+    public void AddToCart(int productId, int amount)
     {
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
 
         var product = _appContext.Products.Find(productId);
 
@@ -86,20 +83,24 @@ public class ShoppingCartService : IShoppingCartService
         _appContext.SaveChanges();
     }
 
-    public void ClearCart(ClaimsPrincipal userClaim)
+    public void ClearCart()
     {
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
 
-        user.ShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
+        _appContext.ShoppingCartItems.Where(x => x.ShoppingCartId == user.ShoppingCartId)
+            .DeleteFromQuery();
 
-        _userManager.UpdateAsync(user);
+        _appContext.SaveChanges();
+        //user.ShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
+
+        //_userManager.UpdateAsync(user);
     }
 
 
 
-    public decimal GetShoppingCartTotal(ClaimsPrincipal userClaim)
+    public decimal GetShoppingCartTotal()
     {
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
 
         var total = _appContext.ShoppingCartItems
             .Where(c => c.ShoppingCartId == user.ShoppingCartId).Select
@@ -114,9 +115,10 @@ public class ShoppingCartService : IShoppingCartService
             
     }
 
-    public void RemoveFromCart(ClaimsPrincipal userClaim, int productId)
+    public void RemoveFromCart(int productId)
     {
-        var user = _userManager.GetUserAsync(userClaim).GetAwaiter().GetResult();
+        var user = _userService.GetCurrentUser().Result;
+
         var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
                      (s => s.ProductId == productId && s.ShoppingCartId == user.ShoppingCartId);
         if (shoppingCartItem is not null)

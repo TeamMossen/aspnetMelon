@@ -1,6 +1,5 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Service.Models;
 
 namespace Service.Services;
 
@@ -22,6 +21,10 @@ public class ProductService : IProductService
             .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
             .Take(pageParameters.PageSize);
     }
+
+    public IEnumerable<ProductDto> GetProductsByCategory(int categoryId) 
+        => _appContext.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).Select(p => (ProductDto)p);
+
 
     public IEnumerable<ProductDto> GetProductsOnSale() 
         => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);

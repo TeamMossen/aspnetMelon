@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Service.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 
@@ -24,17 +25,16 @@ public class OrderController : Controller
     [HttpPost]
     public IActionResult Checkout(Order order)
     {
-        var user = this.User;
         //_shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
 
-        if (_shoppingCartService.GetShoppingCartItems(user).Count == 0)
+        if (_shoppingCartService.GetShoppingCartItems().Count == 0)
         {
             ModelState.AddModelError("", "Your cart is empty!");
         }
         if (ModelState.IsValid)
         {
             //_orderRepository.CreatOrder(order);
-            _shoppingCartService.ClearCart(user);
+            _shoppingCartService.ClearCart();
             return RedirectToAction("CheckoutComplete");
         }
 
