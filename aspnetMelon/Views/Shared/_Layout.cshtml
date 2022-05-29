@@ -28,7 +28,7 @@
                     </ul>
                     @if (User.IsInRole("Administrator"))
                     {
-                        <a class="navbar-brand" asp-area="" asp-controller="AdminHome" asp-action="Index">Admin</a>
+                        <a class="navbar-brand" asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Admin</a>
                     }
                     <partial name="_LoginPartial" />
                 </div>
