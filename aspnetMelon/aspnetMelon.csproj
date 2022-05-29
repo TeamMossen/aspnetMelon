@@ -29,6 +29,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Product\Products.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_AdminLayout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
 
 </Project>
