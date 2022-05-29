@@ -10,7 +10,10 @@ namespace Domain.Models;
 
 public class Order
 {
-    public Order(int orderId, string firstName, string lastName, string phoneNumber, string address, string zipCode, string city, string state, DateTime orderPlaced, decimal orderTotal, object p)
+    private Order()
+    {
+    }
+    public Order(int orderId, string firstName, string lastName, string phoneNumber, string address, string zipCode, string city, string state, DateTime orderPlaced, decimal orderTotal, ICollection<OrderDetail> orderDetails)
     {
         OrderId = orderId;
         FirstName = firstName;
@@ -22,6 +25,7 @@ public class Order
         State = state;
         OrderPlaced = orderPlaced;
         OrderTotal = orderTotal;
+        OrderDetails = orderDetails;
     }
 
     [BindNever]

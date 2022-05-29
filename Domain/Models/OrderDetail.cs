@@ -8,9 +8,8 @@ namespace Domain.Models;
 
 public class OrderDetail
 {
-    public OrderDetail(int orderDetailId, int orderId, int productId, int amount, decimal price)
+    public OrderDetail(int orderId, int productId, int amount, decimal price)
     {
-        OrderDetailId = orderDetailId;
         OrderId = orderId;
         ProductId = productId;
         Amount = amount;

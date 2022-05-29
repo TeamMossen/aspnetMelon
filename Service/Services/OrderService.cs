@@ -1,34 +1,30 @@
-﻿using Domain.Models;
+﻿using Domain;
+using Domain.Models;
 
 namespace Service.Services;
 
 public class OrderService : IOrderService
 {
-    public void CreateOrder(OrderDto order)
+    private readonly IShoppingCartService _shoppingCartService;
+    private readonly AppDbContext _appContext;
+
+    public OrderService(IShoppingCartService shoppingCartService, AppDbContext appContext)
     {
-        var hej = new Order(order);
-
-
-        order.OrderPlaced = DateTime.Now;
-        order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
-        _appDbContext.Orders.Add(order);
-        _appDbContext.SaveChanges();
-
-        var shoppingCartItems = _shoppingCart.GetShoppingCartItems();
-
-        foreach (var shoppingCartItem in shoppingCartItems)
-        {
-            var orderDetail = new OrderDetail
-            {
-                Amount = shoppingCartItem.Amount,
-                Price = shoppingCartItem.Candy.Price,
-                CandyId = shoppingCartItem.Candy.CandyId,
-                OrderId = order.OrderId
-            };
-
-            _appDbContext.OrderDetails.Add(orderDetail);
-        }
-        _appDbContext.SaveChanges();
+        _shoppingCartService = shoppingCartService;
+        _appContext = appContext;
     }
 
+
+    public void CreateOrder(OrderDto order)
+    {
+        List<OrderDetailDto> orderDetails = new List<OrderDetailDto>();
+        foreach (var shoppingCartItem in _shoppingCartService.GetShoppingCartItems())
+        {
+            var orderDetail = new OrderDetail(order.OrderId, shoppingCartItem.Product.ProductId, shoppingCartItem.Amount, shoppingCartItem.Product.Price);
+            orderDetails.Add(orderDetail);
+        }
+        var newOrder = (Order)(order with { OrderPlaced = DateTime.Now, OrderTotal = _shoppingCartService.GetShoppingCartTotal(), OrderDetails = orderDetails });
+        _appContext.Orders.Add(newOrder);
+        _appContext.SaveChanges();
+    }
 }

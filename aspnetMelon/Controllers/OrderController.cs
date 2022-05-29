@@ -26,14 +26,14 @@ public class OrderController : Controller
     public IActionResult Checkout(OrderDto order)
     {
         //_shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
-
+        ModelState.Remove(nameof(order.OrderDetails));
         if (_shoppingCartService.GetShoppingCartItems().Count == 0)
         {
             ModelState.AddModelError("", "Your cart is empty!");
         }
         if (ModelState.IsValid)
         {
-            //_orderRepository.CreatOrder(order);
+            _orderService.CreateOrder(order);
             _shoppingCartService.ClearCart();
             return RedirectToAction("CheckoutComplete");
         }
