@@ -6,10 +6,12 @@ namespace aspnetMelon.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
+    private readonly ICategoryService _categoryService;
 
-    public ProductController(IProductService productService)
+    public ProductController(IProductService productService, ICategoryService categoryService)
     {
         _productService = productService;
+        _categoryService = categoryService;
     }
 
     public IActionResult Details(int id)
@@ -31,4 +33,28 @@ public class ProductController : Controller
 
         return View(productViewModel);
     }
+    public ViewResult List(int categoryId)
+    {
+
+        IEnumerable<ProductDto> products;
+        string currentCategory;
+
+        if (categoryId == 0)
+        {
+            products = _productService.GetProducts(1, 20).OrderBy(p => p.ProductId);
+            currentCategory = "All Products";
+        }
+        else
+        {
+            products = _productService.GetProductsByCategory(categoryId);
+
+            currentCategory = _categoryService.GetCategoryByCategoryId(categoryId).CategoryName;
+        }
+        return View(new ProductListViewModel
+        {
+            Products = products,
+            CurrentCategory = currentCategory
+        });
+    }
+
 }

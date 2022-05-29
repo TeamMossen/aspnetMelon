@@ -43,7 +43,7 @@ public class OrderController : Controller
 
     public IActionResult CheckoutComplete()
     {
-        ViewBag.CheckoutCompleteMessage = "Thank you for your order. Enjoy your candy";
+        ViewBag.CheckoutCompleteMessage = "Thank you for your order!";
         return View();
     }
 }

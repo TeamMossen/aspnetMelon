@@ -24,11 +24,8 @@ public class ProductService : IProductService
 
     public IEnumerable<ProductDto> GetProductsByCategory(int categoryId) 
         => _appContext.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).Select(p => (ProductDto)p);
-
-
     public IEnumerable<ProductDto> GetProductsOnSale() 
         => _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p);
-
     public ProductDto GetProductById(int id) 
         => _appContext.Products.Where(x => x.ProductId == id).Include(p => p.Category).First();
 }
