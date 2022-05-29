@@ -15,8 +15,8 @@ namespace Service.Services
         {
             _appContext = appContext;
         }
-        public CategoryDto GetCategoryByCategoryId(int categoryId)
-        => _appContext.Categories.Where(c => c.CategoryId == categoryId).Select(c => (CategoryDto)c).First();
+        public CategoryDto? GetCategoryByCategoryId(int categoryId)
+            => _appContext.Categories.Where(c => c.CategoryId == categoryId).Select(c => (CategoryDto)c).FirstOrDefault();
 
         public IEnumerable<CategoryDto> GetAllCategories()
             => _appContext.Categories.Select(c => (CategoryDto)c);

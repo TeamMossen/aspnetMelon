@@ -11,25 +11,25 @@ public class ShoppingCartService : IShoppingCartService
     private readonly AppDbContext _appContext;
 
     private readonly IUserService _userService;
-    //private readonly ISession _session;
-    //private readonly UserManager<AppUser> _userManager;
 
-    public ShoppingCartService(AppDbContext appContext, IUserService userService, UserManager<AppUser> userManager)
+    private readonly AppUser _user;
+    //private readonly ISession _session;
+
+    public ShoppingCartService(AppDbContext appContext, IUserService userService)
     {
         _appContext = appContext;
         _userService = userService;
+        _user = _userService.GetCurrentUser().Result;
         //_session = session;
-        //_userManager = userManager;
     }
 
     public ShoppingCart GetCart()
     {
-        var user = _userService.GetCurrentUser().Result;
 
-        user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
-            .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
+        _user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == _user.ShoppingCartId).Include(s => s.Product).ToList();
 
-        return user.ShoppingCart;
+        return _user.ShoppingCart;
     }
     //   // ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
@@ -41,12 +41,10 @@ public class ShoppingCartService : IShoppingCartService
 
     public List<ShoppingCartItem> GetShoppingCartItems()
     {
+        _user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == _user.ShoppingCartId).Include(s => s.Product).ToList();
 
-        var user = _userService.GetCurrentUser().Result;
-        user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
-            .Where(s => s.ShoppingCartId == user.ShoppingCartId).Include(s => s.Product).ToList();
-
-        return user.ShoppingCart.ShoppingCartItems!.ToList();
+        return _user.ShoppingCart.ShoppingCartItems!.ToList();
 
         //_shoppingCart.ShoppingCartItems.ToList();
         //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
@@ -55,20 +53,19 @@ public class ShoppingCartService : IShoppingCartService
     }
     public void AddToCart(int productId, int amount)
     {
-        var user = _userService.GetCurrentUser().Result;
 
         var product = _appContext.Products.Find(productId);
 
         if (product == null) return;
 
         var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
-            (s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == user.ShoppingCartId);
+            (s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == _user.ShoppingCartId);
 
         if (shoppingCartItem == null)
         {
             shoppingCartItem = new ShoppingCartItem
             {
-                ShoppingCartId = user.ShoppingCartId,
+                ShoppingCartId = _user.ShoppingCartId,
                 Product = product,
                 Amount = amount,
             };
@@ -85,25 +82,23 @@ public class ShoppingCartService : IShoppingCartService
 
     public void ClearCart()
     {
-        var user = _userService.GetCurrentUser().Result;
 
-        _appContext.ShoppingCartItems.Where(x => x.ShoppingCartId == user.ShoppingCartId)
+        _appContext.ShoppingCartItems.Where(x => x.ShoppingCartId == _user.ShoppingCartId)
             .DeleteFromQuery();
 
         _appContext.SaveChanges();
-        //user.ShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
+        //_user.ShoppingCart.ShoppingCartItems = new List<ShoppingCartItem>();
 
-        //_userManager.UpdateAsync(user);
+        //__userManager.UpdateAsync(_user);
     }
 
 
 
     public decimal GetShoppingCartTotal()
     {
-        var user = _userService.GetCurrentUser().Result;
 
         var total = _appContext.ShoppingCartItems
-            .Where(c => c.ShoppingCartId == user.ShoppingCartId).Select
+            .Where(c => c.ShoppingCartId == _user.ShoppingCartId).Select
             (c => c.Product.Price * c.Amount).Sum();
 
         return total;
@@ -117,10 +112,9 @@ public class ShoppingCartService : IShoppingCartService
 
     public void RemoveFromCart(int productId)
     {
-        var user = _userService.GetCurrentUser().Result;
 
         var shoppingCartItem = _appContext.ShoppingCartItems.SingleOrDefault
-                     (s => s.ProductId == productId && s.ShoppingCartId == user.ShoppingCartId);
+                     (s => s.ProductId == productId && s.ShoppingCartId == _user.ShoppingCartId);
         if (shoppingCartItem is not null)
         {
             if (shoppingCartItem.Amount > 1)

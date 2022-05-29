@@ -24,14 +24,17 @@ public class ProductController : Controller
 
     public IActionResult Products(int? categoryId = null)
     {
-        var productViewModel = new ProductsViewModel()
+        var productsViewModel = new ProductsViewModel();
+        if (categoryId is not null)
         {
-            Products = categoryId is not null
-                ? _productService.GetProductsByCategory(categoryId.Value)
-                : _productService.GetProducts(1, 20)
-        };
+            productsViewModel.CurrentCategory = _categoryService.GetCategoryByCategoryId(categoryId.Value)?.CategoryName ?? productsViewModel.CurrentCategory;
+            productsViewModel.Products = _productService.GetProductsByCategory(categoryId.Value);
 
-        return View(productViewModel);
+            return productsViewModel.Products.Any() ? View(productsViewModel) : RedirectToAction(nameof(Products));
+        }
+
+        productsViewModel.Products = _productService.GetProducts(1, 20);
+        return View(productsViewModel);
     }
     public ViewResult List(int categoryId)
     {

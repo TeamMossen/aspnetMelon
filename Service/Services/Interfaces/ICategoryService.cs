@@ -8,7 +8,7 @@ namespace Service.Services.Interfaces
 {
     public interface ICategoryService
     {
-        CategoryDto GetCategoryByCategoryId(int categoryId);
+        CategoryDto? GetCategoryByCategoryId(int categoryId);
 
         IEnumerable<CategoryDto> GetAllCategories();
 
