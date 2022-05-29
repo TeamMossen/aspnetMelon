@@ -22,6 +22,12 @@
                         <li class="nav-item">
                             @await Component.InvokeAsync("CategoryMenu")
                         </li>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                        <li class="nav-item">
+                            <h1>hej</h1>
+                        </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace aspnetMelon.Controllers;
-
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -17,7 +17,7 @@ public class HomeController : Controller
         _logger = logger;
         _productService = productService;
     }
-
+    [Authorize(Roles = "Administrator")]
     public IActionResult Index()
     {
         var homeViewModel = new HomeViewModel { ProductsOnSale = _productService.GetProductsOnSale() };
