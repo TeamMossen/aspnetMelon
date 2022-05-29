@@ -27,4 +27,7 @@ public class OrderService : IOrderService
         _appContext.Orders.Add(newOrder);
         _appContext.SaveChanges();
     }
-}
+
+    public IEnumerable<OrderDto> GetAllOrders()
+        => _appContext.Orders.OrderByDescending(o => o.OrderPlaced).Select(o => (OrderDto)o);
+    }

@@ -3,4 +3,6 @@
 public interface IOrderService
 {
     public void CreateOrder(OrderDto order);
+    public IEnumerable<OrderDto> GetAllOrders();
+
 }
