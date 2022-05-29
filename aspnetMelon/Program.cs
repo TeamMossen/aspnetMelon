@@ -32,7 +32,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
         options.Password.RequireNonAlphanumeric = false;
         options.User.RequireUniqueEmail = true;
         options.SignIn.RequireConfirmedAccount = false;
-    })
+    }).AddRoles<AppRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
 #endregion
