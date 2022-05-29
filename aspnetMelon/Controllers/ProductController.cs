@@ -36,6 +36,7 @@ public class ProductController : Controller
         productsViewModel.Products = _productService.GetProducts(1, 20);
         return View(productsViewModel);
     }
+
     public ViewResult List(int categoryId)
     {
 
@@ -53,7 +54,7 @@ public class ProductController : Controller
 
             currentCategory = _categoryService.GetCategoryByCategoryId(categoryId).CategoryName;
         }
-        return View(new ProductListViewModel
+        return View(new ProductsViewModel
         {
             Products = products,
             CurrentCategory = currentCategory
