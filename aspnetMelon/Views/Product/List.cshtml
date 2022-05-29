@@ -1,8 +1,0 @@
-﻿@model ProductsViewModel
-    
-    
-        <h1>@Model.CurrentCategory</h1>
-        @foreach(var product in Model.Products)
-        {
-            <partial name="_productCard" model="product" />
-        }

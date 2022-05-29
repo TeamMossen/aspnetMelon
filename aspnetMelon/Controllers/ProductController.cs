@@ -37,28 +37,28 @@ public class ProductController : Controller
         return View(productsViewModel);
     }
 
-    public ViewResult List(int categoryId)
-    {
+    //public ViewResult List(int categoryId)
+    //{
 
-        IEnumerable<ProductDto> products;
-        string currentCategory;
+    //    IEnumerable<ProductDto> products;
+    //    string currentCategory;
 
-        if (categoryId == 0)
-        {
-            products = _productService.GetProducts(1, 20).OrderBy(p => p.ProductId);
-            currentCategory = "All Products";
-        }
-        else
-        {
-            products = _productService.GetProductsByCategory(categoryId);
+    //    if (categoryId == 0)
+    //    {
+    //        products = _productService.GetProducts(1, 20).OrderBy(p => p.ProductId);
+    //        currentCategory = "All Products";
+    //    }
+    //    else
+    //    {
+    //        products = _productService.GetProductsByCategory(categoryId);
 
-            currentCategory = _categoryService.GetCategoryByCategoryId(categoryId).CategoryName;
-        }
-        return View(new ProductsViewModel
-        {
-            Products = products,
-            CurrentCategory = currentCategory
-        });
-    }
+    //        currentCategory = _categoryService.GetCategoryByCategoryId(categoryId).CategoryName;
+    //    }
+    //    return View(new ProductsViewModel
+    //    {
+    //        Products = products,
+    //        CurrentCategory = currentCategory
+    //    });
+    //}
 
 }

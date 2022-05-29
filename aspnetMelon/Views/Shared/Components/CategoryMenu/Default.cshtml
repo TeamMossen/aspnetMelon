@@ -1,16 +1,19 @@
 ﻿@model IOrderedEnumerable<CategoryDto>
 
+
 <li class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">category<b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li>
-            <a asp-controller="Product" asp-action="List" asp-route-category="">All Products</a>
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        category<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li class="dropdown-item">
+            <a class="nav-link text-dark" asp-controller="Product" asp-action="Products" asp-route-category="">All Products</a>
         </li>
         <li class="divider"></li>
         @foreach(var category in Model)
         {
-            <li>
-                <a asp-controller="Product" asp-action="List" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a>
+            <li class="dropdown-item">
+                <a class="nav-link text-dark" asp-controller="Product" asp-action="Products" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a>
             </li>
         }
     </ul>
