@@ -23,7 +23,7 @@ public class OrderController : Controller
     }
 
     [HttpPost]
-    public IActionResult Checkout(Order order)
+    public IActionResult Checkout(OrderDto order)
     {
         //_shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
 

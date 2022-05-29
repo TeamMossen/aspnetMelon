@@ -2,4 +2,5 @@
 
 public interface IOrderService
 {
+    public void CreateOrder(OrderDto order);
 }

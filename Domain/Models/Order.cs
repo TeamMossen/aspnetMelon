@@ -10,6 +10,20 @@ namespace Domain.Models;
 
 public class Order
 {
+    public Order(int orderId, string firstName, string lastName, string phoneNumber, string address, string zipCode, string city, string state, DateTime orderPlaced, decimal orderTotal, object p)
+    {
+        OrderId = orderId;
+        FirstName = firstName;
+        LastName = lastName;
+        PhoneNumber = phoneNumber;
+        Address = address;
+        ZipCode = zipCode;
+        City = city;
+        State = state;
+        OrderPlaced = orderPlaced;
+        OrderTotal = orderTotal;
+    }
+
     [BindNever]
     public int OrderId { get; set; } = default!;
 
