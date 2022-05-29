@@ -4,13 +4,13 @@
     <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">category<b class="caret"></b></a>
     <ul class="dropdown-menu">
         <li>
-            <a asp-controller="Product" asp-action="List" asp-route-category="">All Products</a>
+            <a asp-controller="Product" asp-action="Products" asp-route-category="">All Products</a>
         </li>
         <li class="divider"></li>
         @foreach(var category in Model)
         {
             <li>
-                <a asp-controller="Product" asp-action="List" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a>
+                <a asp-controller="Product" asp-action="Products" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a>
             </li>
         }
     </ul>

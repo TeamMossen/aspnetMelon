@@ -10,6 +10,6 @@ public interface IProductService
 
     IEnumerable<ProductDto> GetProductsOnSale();
 
-    ProductDto GetProductById(int id);
+    ProductDto? GetProductById(int id);
 
 }
