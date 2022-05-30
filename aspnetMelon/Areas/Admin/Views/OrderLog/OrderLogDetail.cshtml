@@ -1,0 +1,67 @@
+﻿@model OrderDto
+@{
+    ViewData["Title"] = "Order Detail";
+    Layout = "_AdminLayout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>Total</th>
+        <th>Placed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            @Model.OrderId
+        </td>
+        <td>
+            @Model.OrderTotal kr
+        </td>
+        <td>
+            @Model.OrderPlaced
+        </td>
+    </tr>
+    </tbody>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            @Model.FirstName
+        </td>
+        <td>
+            @Model.LastName
+        </td>
+        <td>
+            @Model.Address
+        </td>
+    </tr>
+    </tbody>
+</table>
+<tr/>
+<table class="table table-hover">
+    <tbody>
+    @foreach (var orderDetail in Model.OrderDetails)
+    {
+        <tr>
+            <td>
+                @orderDetail.ProductId
+            </td>
+            <td>
+                @orderDetail.Price
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

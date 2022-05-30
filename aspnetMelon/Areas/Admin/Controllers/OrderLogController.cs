@@ -17,5 +17,11 @@ namespace aspnetMelon.Controllers.Admin
             var orders = _orderService.GetAllOrders();
             return View(orders);
         }
+
+        public IActionResult OrderLogDetail(int id)
+        {
+            var order = _orderService.GetOrder(id);
+            return View(order);
+        }
     }
 }
