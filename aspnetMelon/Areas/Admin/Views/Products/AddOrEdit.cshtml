@@ -1,4 +1,4 @@
-﻿@model 
+﻿@model ProductDto
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h4>Customer Form</h4>
 <hr />
-<div class="row">
+@*<div class="row">
     <div class="col-md-6">
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,4 +37,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@

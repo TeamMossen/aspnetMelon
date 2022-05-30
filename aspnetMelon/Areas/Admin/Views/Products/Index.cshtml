@@ -1,4 +1,4 @@
-﻿@model TModel
+﻿@model ProductsViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,10 +12,13 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault()!.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault()!.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault()!.Stock)
         </th>
         <th>
             <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Customer</a>
@@ -23,17 +26,20 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model.Products) {
         <tr>
             <td>
-                <a asp-action="Profile" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                <a asp-action="AddOrEdit" asp-route-id="@item.ProductId">@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="AddOrEdit" asp-route-id="@item.Id"><i class="fa fa-marker fa-lg"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash-alt fa-lg"></i></a>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                <a asp-action="AddOrEdit" asp-route-id="@item.ProductId"><i class="fa fa-marker fa-lg"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.ProductId" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash-alt fa-lg"></i></a>
             </td>
         </tr>
     }

@@ -1,11 +1,11 @@
-global using Service.Services;
+global using Service.Services.Interfaces;
 global using Service.Models;
 global using aspnetMelon.ViewModels;
+using Service.Services;
 using Domain;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Service.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 // connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
