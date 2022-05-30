@@ -17,7 +17,6 @@ public class HomeController : Controller
         _logger = logger;
         _productService = productService;
     }
-    [Authorize(Roles = "Administrator")]
     public IActionResult Index()
     {
         var homeViewModel = new HomeViewModel { ProductsOnSale = _productService.GetProductsOnSale() };

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Orders";
+    Layout = "_AdminLayout";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -18,10 +19,10 @@
     @foreach (var order in Model) {
         <tr>
             <td>
-                <a asp-action="OrderLogDetail" asp-route-id="@order.OrderId">@order.OrderId</a>
+                <a asp-action="OrderLogDetail" asp-route-id=@order.OrderId>@order.OrderId</a>
             </td>
             <td>
-                @order.OrderTotal
+                @order.OrderTotal kr
             </td>
             <td>
                 @order.OrderPlaced
