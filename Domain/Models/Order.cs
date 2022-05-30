@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Models;
 
 public class Order
 {
-    private Order()
+    internal Order()
     {
     }
     public Order(int orderId, string firstName, string lastName, string phoneNumber, string address, string zipCode, string city, string state, DateTime orderPlaced, decimal orderTotal, ICollection<OrderDetail> orderDetails)

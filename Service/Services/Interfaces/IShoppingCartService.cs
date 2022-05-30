@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Domain.Models;
+﻿using Domain.Models;
 
 namespace Service.Services.Interfaces;
 

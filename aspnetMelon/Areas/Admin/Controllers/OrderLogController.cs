@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Service.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetMelon.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Administrator")]
 public class OrderLogController : Controller
 {
     private readonly IOrderService _orderService;

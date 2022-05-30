@@ -1,7 +1,5 @@
-﻿using Domain.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Service.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 

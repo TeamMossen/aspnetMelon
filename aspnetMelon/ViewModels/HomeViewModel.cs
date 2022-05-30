@@ -1,6 +1,4 @@
-﻿using Service.Models;
-
-namespace aspnetMelon.ViewModels;
+﻿namespace aspnetMelon.ViewModels;
 
 public class HomeViewModel
 {

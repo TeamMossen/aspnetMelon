@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetMelon.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles="Administrator")]
 public class ProductsController : Controller
 {
     private readonly IProductService _productService;

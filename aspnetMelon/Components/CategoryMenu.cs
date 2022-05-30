@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Service.Services.Interfaces;
 
 namespace aspnetMelon.Components;
 

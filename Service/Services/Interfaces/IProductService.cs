@@ -1,6 +1,4 @@
-﻿using Service.Models;
-
-namespace Service.Services.Interfaces;
+﻿namespace Service.Services.Interfaces;
 
 public interface IProductService
 {

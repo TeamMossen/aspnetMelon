@@ -4,7 +4,6 @@ global using aspnetMelon.ViewModels;
 using Service.Services;
 using Domain;
 using Domain.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

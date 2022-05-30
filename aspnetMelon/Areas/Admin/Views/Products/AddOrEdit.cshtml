@@ -27,10 +27,15 @@
                     <input asp-for="CategoryId" class="form-control" />
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label asp-for="IsOnSale" class="control-label"></label>
-                    <input asp-for="IsOnSale" class="form-control" />
+                    <input type="checkbox" asp-for="IsOnSale" class="form-check" />
                     <span asp-validation-for="IsOnSale" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="SalePrice" class="control-label"></label>
+                    <input asp-for="SalePrice" class="form-control" />
+                    <span asp-validation-for="SalePrice" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">

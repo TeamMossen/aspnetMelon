@@ -1,8 +1,6 @@
 ﻿using Domain;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 
 namespace Service.Services;
 
