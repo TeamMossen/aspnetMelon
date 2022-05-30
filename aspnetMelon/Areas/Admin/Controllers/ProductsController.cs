@@ -2,6 +2,7 @@
 
 namespace aspnetMelon.Areas.Admin.Controllers;
 
+[Area("Admin")]
 public class ProductsController : Controller
 {
     // GET

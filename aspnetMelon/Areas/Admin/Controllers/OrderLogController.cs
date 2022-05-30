@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Services.Interfaces;
 
-namespace aspnetMelon.Controllers.Admin
+namespace aspnetMelon.Areas.Admin.Controllers;
+
+[Area("Admin")]
+public class OrderLogController : Controller
 {
-    [Area("Admin")]
-    public class OrderLogController : Controller
-    {
-        private readonly IOrderService _orderService;
-        private readonly IProductService _productService;
+    private readonly IOrderService _orderService;
 
         public OrderLogController(IOrderService orderService, IProductService productService)
         {
