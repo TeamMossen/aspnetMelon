@@ -26,5 +26,5 @@ public class OrderLogController : Controller
             var order = _orderService.GetOrder(id);
             return View(order);
         }
-    }
+    
 }
