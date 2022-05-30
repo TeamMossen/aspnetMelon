@@ -7,10 +7,13 @@ namespace aspnetMelon.Areas.Admin.Controllers;
 public class OrderLogController : Controller
 {
     private readonly IOrderService _orderService;
+    private readonly IProductService _productService;
 
-        public OrderLogController(IOrderService orderService)
+    public OrderLogController(IOrderService orderService, IProductService productService)
         {
             _orderService = orderService;
+            _productService = productService;
+            _productService = productService;
         }
         public IActionResult Index()
         {

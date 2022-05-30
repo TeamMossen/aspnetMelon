@@ -30,4 +30,8 @@ public class ProductService : IProductService
     public ProductDto? GetProductById(int id)
         => _appContext.Products.Find(id);
     //_appContext.Products.Where(x => x.ProductId == id).Include(p => p.Category).First();
+
+    //IEnumerable<ProductDto> GetProductsByOrderDetailId(int orderDetailId)
+    //=> _appContext.Products
+
 }
