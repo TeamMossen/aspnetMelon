@@ -11,5 +11,6 @@ public interface IProductService
     IEnumerable<ProductDto> GetProductsOnSale();
 
     ProductDto? GetProductById(int id);
+    //IEnumerable<ProductDto> GetProductsByOrderDetailId(int orderDetailId);
 
 }
