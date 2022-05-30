@@ -4,9 +4,9 @@ public class Product
 {
     internal Product(){}
 
-    public Product(string name, string description, decimal price, string imageUrl, string imageThumbnailUrl, bool isOnSale, int stock, int categoryId, decimal salePrice = 0)
+    public Product(int productId, string name, string description, decimal price, string imageUrl, string imageThumbnailUrl, bool isOnSale, int stock, int categoryId, decimal salePrice = 0)
     {
-
+        ProductId = productId;
         Name = name;
         Description = description;
         CategoryId = categoryId;

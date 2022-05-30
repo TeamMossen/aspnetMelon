@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Service.Services.Interfaces;
+﻿namespace Service.Services.Interfaces;
 
 public interface IUserService
 {

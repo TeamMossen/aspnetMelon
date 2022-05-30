@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Service.Models;
+﻿namespace Service.Models;
 
 public record OrderDto(int OrderId, string FirstName, string LastName, string PhoneNumber, string Address, string ZipCode, string City, string State, DateTime OrderPlaced, decimal OrderTotal, ICollection<OrderDetailDto> OrderDetails)
 {

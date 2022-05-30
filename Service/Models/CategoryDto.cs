@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Service.Models;
+﻿namespace Service.Models;
 
 public record CategoryDto(int CategoryId, string CategoryName, string CategoryDescription, ICollection<ProductDto>? Products = null)
 {

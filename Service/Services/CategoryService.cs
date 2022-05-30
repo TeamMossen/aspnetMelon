@@ -1,7 +1,4 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore;
-
-namespace Service.Services;
+﻿namespace Service.Services;
 
 public class CategoryService : ICategoryService
 {

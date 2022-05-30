@@ -1,7 +1,4 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore;
-
-namespace Service.Services;
+﻿namespace Service.Services;
 
 public class ProductService : IProductService
 {
@@ -11,7 +8,14 @@ public class ProductService : IProductService
     {
         _appContext = appContext;
     }
-
+    public async Task AddOrUpdate(ProductDto product)
+    {
+        //TODO Fix not updating DB
+            //Product p = product;
+            //p.Category = _appContext.Categories!.Find(p.CategoryId)!;
+        _appContext.Products.Update(product);
+        await _appContext.SaveChangesAsync();
+    }
 
     public async Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize)
     {

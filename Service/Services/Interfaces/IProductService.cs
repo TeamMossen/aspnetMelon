@@ -2,6 +2,8 @@
 
 public interface IProductService
 {
+    Task AddOrUpdate(ProductDto product);
+
     Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize);
 
     IEnumerable<ProductDto> GetProductsByCategory(int categoryId);

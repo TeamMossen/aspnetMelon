@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Service.Models;
+﻿namespace Service.Models;
 
 public record OrderDetailDto(int OrderDetailId, int OrderId, int ProductId, int Amount, decimal Price)
 {

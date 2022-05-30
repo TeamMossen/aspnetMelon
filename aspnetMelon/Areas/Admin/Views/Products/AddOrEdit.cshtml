@@ -11,6 +11,8 @@
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="ImageThumbnailUrl" />
+            <input type="hidden" asp-for="ImageUrl" />
             <div class="row">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

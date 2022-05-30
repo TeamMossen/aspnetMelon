@@ -1,8 +1,4 @@
-﻿using Domain;
-using Domain.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace Service.Services;
+﻿namespace Service.Services;
 
 public class OrderService : IOrderService
 {
