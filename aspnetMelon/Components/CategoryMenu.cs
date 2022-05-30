@@ -12,10 +12,10 @@ public class CategoryMenu : ViewComponent
         _categoryService = categoryService;
     }
 
-    public IViewComponentResult Invoke()
+    public async Task<IViewComponentResult> InvokeAsync()
     {
-        var categories = _categoryService.GetAllCategories().OrderBy(c => c.CategoryName);
-
-        return View(categories);
+        var categories = await _categoryService.GetAllCategories();
+        
+        return View(categories.OrderBy(c => c.CategoryName));
     }
 }

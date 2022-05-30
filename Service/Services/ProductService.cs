@@ -13,13 +13,13 @@ public class ProductService : IProductService
     }
 
 
-    public IEnumerable<ProductDto> GetProducts(int page, int pageSize)
+    public async Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize)
     {
         var pageParameters = new PageParameters(page, pageSize);
 
-        return _appContext.Products.Select(p => (ProductDto)p!)
+        return await _appContext.Products.Include(p => p.Category).Select(p => (ProductDto)p!)
             .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
-            .Take(pageParameters.PageSize);
+            .Take(pageParameters.PageSize).ToListAsync();
     }
 
     public IEnumerable<ProductDto> GetProductsByCategory(int categoryId) 

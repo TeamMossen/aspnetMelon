@@ -16,7 +16,7 @@ public class ProductsController : Controller
     {
         return View(new ProductsViewModel
         {
-            Products = _productService.GetProducts(1, 20)
+            Products = await _productService.GetProducts(1, 20)
         });
     }
     public IActionResult AddOrEdit(int id = 0)

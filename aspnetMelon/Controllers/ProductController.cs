@@ -33,7 +33,7 @@ public class ProductController : Controller
             return productsViewModel.Products.Any() ? View(productsViewModel) : RedirectToAction(nameof(Products));
         }
 
-        productsViewModel.Products = _productService.GetProducts(1, 20);
+        productsViewModel.Products = _productService.GetProducts(1, 20).Result;
         return View(productsViewModel);
     }
 

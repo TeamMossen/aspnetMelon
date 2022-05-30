@@ -4,7 +4,7 @@ namespace Service.Services.Interfaces;
 
 public interface IProductService
 {
-    IEnumerable<ProductDto> GetProducts(int page, int pageSize);
+    Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize);
 
     IEnumerable<ProductDto> GetProductsByCategory(int categoryId);
 
