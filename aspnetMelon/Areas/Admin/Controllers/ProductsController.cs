@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetMelon.Areas.Admin.Controllers;
 
@@ -19,13 +20,13 @@ public class ProductsController : Controller
             Products = await _productService.GetProducts(1, 20)
         });
     }
-    public IActionResult AddOrEdit(int id = 0)
+    public IActionResult AddOrEdit(int? id)
     {
-        //if (id == 0)
-        //    return View(new Customer());
-        //else
-        //    return View(_context.Customers.Find(id));
-        return View();
+        if (id is null)
+            return View();
+        var product = _productService.GetProductById(id.Value);
+
+        return product is not null ? View(product) : NotFound($"No product with id:{id} found");
     }
 
     public async Task<IActionResult> Delete(int? id)

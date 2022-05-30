@@ -4,27 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>Customer Form</h4>
+<h4 asp-for="Name">Edit Product</h4>
 <hr />
-@*<div class="row">
+<div class="row">
     <div class="col-md-6">
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group col-md-6">
+            <input type="hidden" asp-for="ProductId" />
+            <div class="row">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
+            <div class="row">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" rows="5" class="form-control"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="IsOnSale" class="control-label"></label>
+                    <input asp-for="IsOnSale" class="form-control" />
+                    <span asp-validation-for="IsOnSale" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Stock" class="control-label"></label>
+                    <input asp-for="Stock" class="form-control" />
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <input type="submit" value="Submit" class="btn btn-primary btn-block" />
                     <a asp-action="Index"  class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
                 </div>
@@ -37,4 +60,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+}

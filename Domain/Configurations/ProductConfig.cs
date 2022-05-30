@@ -19,6 +19,7 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
                 CategoryId = 3,
                 Stock = 5,
                 IsOnSale = false,
+                SalePrice = 1400,
                 Price = 1749,
                 ImageThumbnailUrl = "\\Images\\dt770pro.jpg",
                 ImageUrl = "\\Images\\dt770pro.jpg"
@@ -43,6 +44,7 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
                 CategoryId = 3,
                 Stock = 55,
                 IsOnSale = true,
+                SalePrice = 419,
                 Price = 15790,
                 ImageThumbnailUrl = "\\Images\\lg-tv.jpg",
                 ImageUrl = "\\Images\\lg-tv.jpg"
@@ -67,6 +69,7 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
                 CategoryId = 2,
                 Stock = 550,
                 IsOnSale = true,
+                SalePrice = 419,
                 Price = 2589,
                 ImageThumbnailUrl = "\\Images\\deco-m5.jpg",
                 ImageUrl = "\\Images\\deco-m5.jpg"
@@ -103,6 +106,7 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
                 CategoryId = 1,
                 Stock = 5000,
                 IsOnSale = true,
+                SalePrice = 419,
                 Price = 599,
                 ImageThumbnailUrl = "\\Images\\ifixit.jpg",
                 ImageUrl = "\\Images\\ifixit.jpg"
