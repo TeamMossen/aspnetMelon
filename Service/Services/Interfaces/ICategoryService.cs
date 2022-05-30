@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Services.Interfaces
+namespace Service.Services.Interfaces;
+
+public interface ICategoryService
 {
-    public interface ICategoryService
-    {
-        CategoryDto? GetCategoryByCategoryId(int categoryId);
+    CategoryDto? GetCategoryByCategoryId(int categoryId);
 
-        IEnumerable<CategoryDto> GetAllCategories();
+    IEnumerable<CategoryDto> GetAllCategories();
 
-    }
 }

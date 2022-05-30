@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace aspnetMelon.Controllers
+namespace aspnetMelon.Areas.Admin.Controllers;
+
+[Area("Admin")]
+public class AdminHomeController : Controller
 {
-    [Area("Admin")]
-    public class AdminHomeController : Controller
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }
