@@ -8,14 +8,19 @@ public class ProductService : IProductService
     {
         _appContext = appContext;
     }
-    public async Task AddOrUpdate(ProductDto product)
+    public async Task<bool> AddOrUpdate(ProductDto product)
     {
         //TODO Fix not updating DB
             //Product p = product;
             //p.Category = _appContext.Categories!.Find(p.CategoryId)!;
         _appContext.Products.Update(product);
-        await _appContext.SaveChangesAsync();
+        //_appContext.SaveChanges();
+        var i = await _appContext.SaveChangesAsync() > 0;
+        return i;
     }
+
+    public async Task<bool> Delete(int id) 
+        => await _appContext.Products.DeleteByKeyAsync(id) > 0;
 
     public async Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize)
     {

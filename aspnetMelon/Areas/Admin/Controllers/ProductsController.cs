@@ -31,14 +31,22 @@ public class ProductsController : Controller
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult AddOrEdit(ProductDto product)
+    public async Task<IActionResult> AddOrEdit(ProductDto product)
     {
         //_shoppingCartService.SetShoppingCartItems(_shoppingCartService.GetShoppingCartItems(user).AsEnumerable());
         ModelState.Remove(nameof(product.Category));
+        if (product.ProductId is 0)
+        {
+            product = product with { ImageUrl = "\\Images\\limelon.jpg", ImageThumbnailUrl = "\\Images\\limelon.jpg" };
+            ModelState.Remove(nameof(product.ImageThumbnailUrl));
+            ModelState.Remove(nameof(product.ImageUrl));
+            ModelState.Remove(nameof(product.ProductId));
+        }
         if (ModelState.IsValid)
         {
-            _productService.AddOrUpdate(product);
-            return RedirectToAction("Index");
+            return await _productService.AddOrUpdate(product) 
+                ? RedirectToAction("Index") 
+                : BadRequest();
         }
 
         return View(product);
@@ -58,11 +66,6 @@ public class ProductsController : Controller
     //}
 
     
-    public async Task<IActionResult> Delete(int? id)
-    {
-        //var customer = await _context.Customers.FindAsync(id);
-        //_context.Customers.Remove(customer);
-        //await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
+    public async Task<IActionResult> Delete(int id) 
+        => await _productService.Delete(id) ? RedirectToAction(nameof(Index)) : BadRequest();
 }

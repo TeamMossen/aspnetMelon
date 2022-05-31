@@ -2,7 +2,9 @@
 
 public interface IProductService
 {
-    Task AddOrUpdate(ProductDto product);
+    Task<bool> AddOrUpdate(ProductDto product);
+
+    Task<bool> Delete(int id);
 
     Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize);
 

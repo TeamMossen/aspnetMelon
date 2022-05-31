@@ -85,12 +85,12 @@ footer {
     min-height: 400px;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+/*.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
-}
+}*/
 
-.btn {
+/*.btn {
     background-color: #fcaeae !important;
     border-color: #fba1a1 !important;
-}
+}*/
