@@ -31,7 +31,8 @@ public class OrderService : IOrderService
     public OrderDto? GetOrder(int orderId) 
         => _appContext.Orders
                 .Where(o => o.OrderId == orderId)
-                .Include(o => o.OrderDetails)
+                .Include(o => o.OrderDetails)!
+                .ThenInclude(o => o.Product)
                 .Select(o => (OrderDto)o)
                 .FirstOrDefault();
     }
