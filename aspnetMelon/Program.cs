@@ -43,6 +43,8 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+builder.Services.AddHttpClient<IReviewService, AmazonService>
+    (c => c.BaseAddress = new Uri("https://data.unwrangle.com/api/getter?platform=amazon_reviews&api_key=630c29a6a8f93842e152228cc86c6e750f8f8f95&url="));
 #endregion
 
 builder.Services.AddHttpContextAccessor();

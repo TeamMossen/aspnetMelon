@@ -468,6 +468,27 @@ namespace Domain.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Models.ProductReview", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewUri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("ProductReviews");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 5,
+                            ReviewUri = "https://www.amazon.com/TP-Link-Deco-Whole-Home-System/dp/B06WVCB862/ref=sr_1_3?keywords=deco+m5&qid=1654024122&sr=8-3"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("ShoppingCartId")
@@ -653,6 +674,17 @@ namespace Domain.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Domain.Models.ProductReview", b =>
+                {
+                    b.HasOne("Domain.Models.Product", "Product")
+                        .WithOne()
+                        .HasForeignKey("Domain.Models.ProductReview", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Domain.Models.ShoppingCartItem", b =>

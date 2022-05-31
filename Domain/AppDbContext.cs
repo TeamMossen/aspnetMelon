@@ -20,6 +20,8 @@ public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
     public DbSet<ShoppingCartItem> ShoppingCartItems => Set<ShoppingCartItem>();
+    public DbSet<ProductReview> ProductReviews => Set<ProductReview>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -181,6 +181,24 @@ namespace Domain.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductReviews",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ReviewUri = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductReviews", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ShoppingCartItems",
                 columns: table => new
                 {
@@ -331,6 +349,11 @@ namespace Domain.Migrations
                     { 12, 4, "Denna tjockskaliga, grågröna nätmelon som är lite klyftad i skalet har en alldeles ljuvlig smak! Fruktköttet är laxfärgat, mjukt och smältande, precis som hos cantaloupe melonen. Nätmelon har fått sitt namn efter det typiska nätmönstret på skalet.Det är en dessertfrukt med mycket söt, aromatisk smak.", "\\Images\\nätmelon-italiensk.jpg", "\\Images\\nätmelon-italiensk.jpg", false, "Nätmelon italiensk", 59m, 0m, 543 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "ProductReviews",
+                columns: new[] { "ProductId", "ReviewUri" },
+                values: new object[] { 5, "https://www.amazon.com/TP-Link-Deco-Whole-Home-System/dp/B06WVCB862/ref=sr_1_3?keywords=deco+m5&qid=1654024122&sr=8-3" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -420,6 +443,9 @@ namespace Domain.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "ProductReviews");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCartItems");

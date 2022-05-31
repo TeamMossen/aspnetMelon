@@ -5,6 +5,8 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         //builder.Navigation(p => p.Category).AutoInclude(false);
+
+
         builder.HasData(
             new Product { 
                 ProductId = 1,
