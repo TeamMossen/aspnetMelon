@@ -320,7 +320,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Beyerdynamics DT770 Pro 80",
                             Price = 1749m,
-                            SalePrice = 0m,
+                            SalePrice = 1400m,
                             Stock = 5
                         },
                         new
@@ -346,7 +346,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "LG 65\" OLED 4K TV OLED65C1",
                             Price = 15790m,
-                            SalePrice = 0m,
+                            SalePrice = 419m,
                             Stock = 55
                         },
                         new
@@ -372,7 +372,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "TP-link Deco M5 Mesh-system AC1300 3-pack",
                             Price = 2589m,
-                            SalePrice = 0m,
+                            SalePrice = 419m,
                             Stock = 550
                         },
                         new
@@ -411,7 +411,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "Ifixit Pro Tech Toolkit Reparationskit",
                             Price = 599m,
-                            SalePrice = 0m,
+                            SalePrice = 419m,
                             Stock = 5000
                         },
                         new

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220528193258_ShoppingCartFix")]
-    partial class ShoppingCartFix
+    [Migration("20220531105047_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,6 +299,9 @@ namespace Domain.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("SalePrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
@@ -319,6 +322,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Beyerdynamics DT770 Pro 80",
                             Price = 1749m,
+                            SalePrice = 1400m,
                             Stock = 5
                         },
                         new
@@ -331,6 +335,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Sonos ARC Hemmabio paket",
                             Price = 18990m,
+                            SalePrice = 0m,
                             Stock = 420
                         },
                         new
@@ -343,6 +348,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "LG 65\" OLED 4K TV OLED65C1",
                             Price = 15790m,
+                            SalePrice = 419m,
                             Stock = 55
                         },
                         new
@@ -355,6 +361,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Synology DS220+ Nas för 2 hårddiskar",
                             Price = 3890m,
+                            SalePrice = 0m,
                             Stock = 99
                         },
                         new
@@ -367,6 +374,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "TP-link Deco M5 Mesh-system AC1300 3-pack",
                             Price = 2589m,
+                            SalePrice = 419m,
                             Stock = 550
                         },
                         new
@@ -379,6 +387,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Asus RT-AX55 Trådlös router AX1800",
                             Price = 1290m,
+                            SalePrice = 0m,
                             Stock = 55
                         },
                         new
@@ -391,6 +400,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Linocell Powerbank med solcellsladdning 16000 mAh",
                             Price = 699m,
+                            SalePrice = 0m,
                             Stock = 999
                         },
                         new
@@ -403,6 +413,7 @@ namespace Domain.Migrations
                             IsOnSale = true,
                             Name = "Ifixit Pro Tech Toolkit Reparationskit",
                             Price = 599m,
+                            SalePrice = 419m,
                             Stock = 5000
                         },
                         new
@@ -415,6 +426,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Samsung Galaxy S21 FE 128 GB Svart",
                             Price = 8190m,
+                            SalePrice = 0m,
                             Stock = 10000
                         },
                         new
@@ -427,6 +439,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Jimbee Tropical",
                             Price = 49m,
+                            SalePrice = 0m,
                             Stock = 1000000
                         },
                         new
@@ -439,6 +452,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Limelon",
                             Price = 39m,
+                            SalePrice = 0m,
                             Stock = 5000
                         },
                         new
@@ -451,6 +465,7 @@ namespace Domain.Migrations
                             IsOnSale = false,
                             Name = "Nätmelon italiensk",
                             Price = 59m,
+                            SalePrice = 0m,
                             Stock = 543
                         });
                 });

@@ -15,6 +15,7 @@ public class Product
         Price = price;
         ImageThumbnailUrl = imageThumbnailUrl;
         ImageUrl = imageUrl;
+        SalePrice = salePrice;
     }
 
     public int ProductId { get; set; }

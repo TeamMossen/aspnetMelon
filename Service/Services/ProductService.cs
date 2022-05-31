@@ -13,10 +13,10 @@ public class ProductService : IProductService
         //TODO Fix not updating DB
             //Product p = product;
             //p.Category = _appContext.Categories!.Find(p.CategoryId)!;
-        _appContext.Products.Update(product);
+        Product p = product;
+        _appContext.Products.Update(p);
         //_appContext.SaveChanges();
-        var i = await _appContext.SaveChangesAsync() > 0;
-        return i;
+        return await _appContext.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> Delete(int id) 
