@@ -24,7 +24,7 @@ public class OrderLogController : Controller
         public IActionResult OrderLogDetail(int id)
         {
             var order = _orderService.GetOrder(id);
-            return View();
+            return View(order);
         }
     
 }
