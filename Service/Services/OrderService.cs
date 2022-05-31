@@ -28,10 +28,10 @@ public class OrderService : IOrderService
     public IEnumerable<OrderDto> GetAllOrders()
         => _appContext.Orders.OrderByDescending(o => o.OrderPlaced).Select(o => (OrderDto)o);
 
-    public OrderDto GetOrder(int orderId) 
+    public OrderDto? GetOrder(int orderId) 
         => _appContext.Orders
                 .Where(o => o.OrderId == orderId)
                 .Include(o => o.OrderDetails)
                 .Select(o => (OrderDto)o)
-                .First();
+                .FirstOrDefault();
     }

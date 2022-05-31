@@ -14,7 +14,6 @@ public class OrderLogController : Controller
         {
             _orderService = orderService;
             _productService = productService;
-            _productService = productService;
         }
         public IActionResult Index()
         {
@@ -25,7 +24,7 @@ public class OrderLogController : Controller
         public IActionResult OrderLogDetail(int id)
         {
             var order = _orderService.GetOrder(id);
-            return View(order);
+            return View();
         }
     
 }
