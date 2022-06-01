@@ -21,7 +21,7 @@ public class ProductController : Controller
         if (product is null)
             return NotFound();
 
-        var productReviews = await _productReviewService.GetReviews(5);
+        var productReviews = await _productReviewService.GetReviews(id);
         var productDetailViewModel = new ProductDetailViewModel { Product = product, ProductReviews = productReviews };
         return View(productDetailViewModel);
     }

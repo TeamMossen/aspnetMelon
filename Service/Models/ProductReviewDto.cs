@@ -4,12 +4,8 @@ namespace Service.Models;
 
 public record ProductReviewsDto(
     [property: JsonPropertyName("success")] bool Success,
-    [property: JsonPropertyName("reviews")] IEnumerable<ProductReviewDto> Review)
+    [property: JsonPropertyName("reviews")] IEnumerable<ProductReviewDto> Reviews)
 {
-    //[JsonPropertyName("")]
-    //public int Ratings { get; init; } = Ratings;
-    [JsonPropertyName("reviews")]
-    public IEnumerable<ProductReviewDto> Reviews { get; init; } = Review;
 }
 
 public record ProductReviewDto(
