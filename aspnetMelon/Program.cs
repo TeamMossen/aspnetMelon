@@ -5,6 +5,9 @@ using Service.Services;
 using Domain;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 // connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -43,8 +46,15 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-builder.Services.AddHttpClient<IReviewService, AmazonService>
-    (c => c.BaseAddress = new Uri("https://data.unwrangle.com/api/getter?platform=amazon_reviews&api_key=630c29a6a8f93842e152228cc86c6e750f8f8f95&url="));
+builder.Services.AddHttpClient<IReviewService, AmazonService>(c =>
+    {
+        c.BaseAddress = new Uri("https://data.unwrangle.com/api/getter?platform=amazon_reviews&api_key=630c29a6a8f93842e152228cc86c6e750f8f8f95&url=");
+        c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    })
+    .ConfigurePrimaryHttpMessageHandler(config => new HttpClientHandler
+    {
+        AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
+    });
 #endregion
 
 builder.Services.AddHttpContextAccessor();

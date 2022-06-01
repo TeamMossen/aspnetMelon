@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics;
+using System.IO.Compression;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 
 namespace Service.Services;
 
@@ -21,17 +24,32 @@ public class AmazonService : IReviewService
         var productReview = await _appDbContext.ProductReviews.FindAsync(5); //TODO temp
         if(productReview == null)
             return null;
+        IEnumerable<ReviewDto> result = new List<ReviewDto>();
+        var request = new HttpRequestMessage(HttpMethod.Get, productReview.ReviewUri);
+        var response = await _httpClient.SendAsync(request);
+       
+        if (response.IsSuccessStatusCode)
+        {
+            using var contentStream = await response.Content.ReadAsStreamAsync();
+            StreamReader reader = new StreamReader(contentStream);
+            var test = reader.ReadToEnd();
+            return new ReviewDto[0];
+        }
 
-        //var responseInfo = await _httpClient.GetAsync(productReview.ReviewUri);
+        //var response = await _httpClient.GetAsync(productReview.ReviewUri);
+        //string responseBody = await response.Content.ReadAsStringAsync();
 
-        var responseJsonString = await _httpClient.GetStringAsync(productReview.ReviewUri);
         //svar: responseJsonString="\u001f�\b\0\0\0\0\0\0\0��]k�0\u0018���+��&\u0012��dlt���fc��]���\r�Ȓ\\+8r�G�b�\u000f٭�F�tq@�{8�Dѻ\u..."
 
         //TODO Har fixat review dtos o jsonmapping så raden under ska funka om vi får in korrekt json data.
         //var p = await _httpClient.GetFromJsonAsync<ReviewDto>(productReview.ReviewUri);
 
-
+        if (response.IsSuccessStatusCode)
+        {
+            return new ReviewDto[0];
+        }
         return new ReviewDto[1];
     }
+
 }
 

@@ -20,7 +20,7 @@ public class ProductController : Controller
         var product = _productService.GetProductById(id);
         if (product is null)
             return NotFound();
-        var p = _reviewService.GetReviews(5).Result;
+        var p = _reviewService.GetReviews(5);
         return View(product);
     }
 
