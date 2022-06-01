@@ -24,7 +24,7 @@ public class AmazonService : IProductReviewService
 
     public async Task<ProductReviewsDto?> GetReviews(int productId)
     {
-        var productReview = await _appDbContext.ProductReviews.FindAsync(productId); //TODO temp
+        var productReview = await _appDbContext.ProductReviews.FindAsync(productId); 
         if(productReview == null)
             return null;
         //IEnumerable<ReviewDto> result = new List<ReviewDto>();
