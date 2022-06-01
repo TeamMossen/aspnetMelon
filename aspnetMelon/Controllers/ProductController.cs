@@ -6,13 +6,13 @@ public class ProductController : Controller
 {
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
-    private readonly IReviewService _reviewService;
+    private readonly IProductReviewService _productReviewService;
 
-    public ProductController(IProductService productService, ICategoryService categoryService, IReviewService reviewService)
+    public ProductController(IProductService productService, ICategoryService categoryService, IProductReviewService productReviewService)
     {
         _productService = productService;
         _categoryService = categoryService;
-        _reviewService = reviewService;
+        _productReviewService = productReviewService;
     }
 
     public IActionResult Details(int id)
@@ -20,7 +20,7 @@ public class ProductController : Controller
         var product = _productService.GetProductById(id);
         if (product is null)
             return NotFound();
-        var p = _reviewService.GetReviews(5);
+        var p = _productReviewService.GetReviews(5);
         return View(product);
     }
 
