@@ -2,17 +2,17 @@
 
 namespace Service.Models;
 
-public record ReviewsDto(bool Success, IEnumerable<ReviewDto> Review)
+public record ProductReviewsDto(bool Success, IEnumerable<ProductReviewDto> Review)
 {
     [JsonPropertyName("success")]
     public bool Success { get; init; } = Success;
     //[JsonPropertyName("")]
     //public int Ratings { get; init; } = Ratings;
     [JsonPropertyName("reviews")]
-    public IEnumerable<ReviewDto> Review { get; init; } = Review;
+    public IEnumerable<ProductReviewDto> Review { get; init; } = Review;
 }
 
-public record ReviewDto(
+public record ProductReviewDto(
     [property: JsonPropertyName("review_title")] string Title,
     [property: JsonPropertyName("author_name")] string Author, 
     [property: JsonPropertyName("date")] string Date,
