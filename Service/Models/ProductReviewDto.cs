@@ -9,7 +9,7 @@ public record ProductReviewsDto(bool Success, IEnumerable<ProductReviewDto> Revi
     //[JsonPropertyName("")]
     //public int Ratings { get; init; } = Ratings;
     [JsonPropertyName("reviews")]
-    public IEnumerable<ProductReviewDto> Review { get; init; } = Review;
+    public IEnumerable<ProductReviewDto> Reviews { get; init; } = Review;
 }
 
 public record ProductReviewDto(

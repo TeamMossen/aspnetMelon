@@ -15,13 +15,15 @@ public class ProductController : Controller
         _productReviewService = productReviewService;
     }
 
-    public IActionResult Details(int id)
+    public async Task<IActionResult> Details(int id)
     {
         var product = _productService.GetProductById(id);
         if (product is null)
             return NotFound();
-        var p = _productReviewService.GetReviews(5);
-        return View(product);
+
+        var productReviews = await _productReviewService.GetReviews(5);
+        var productDetailViewModel = new ProductDetailViewModel { Product = product, ProductReviews = productReviews };
+        return View(productDetailViewModel);
     }
 
     public IActionResult Products(int? categoryId = null)
