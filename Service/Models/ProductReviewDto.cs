@@ -2,10 +2,10 @@
 
 namespace Service.Models;
 
-public record ProductReviewsDto(bool Success, IEnumerable<ProductReviewDto> Review)
+public record ProductReviewsDto(
+    [property: JsonPropertyName("success")] bool Success,
+    [property: JsonPropertyName("reviews")] IEnumerable<ProductReviewDto> Review)
 {
-    [JsonPropertyName("success")]
-    public bool Success { get; init; } = Success;
     //[JsonPropertyName("")]
     //public int Ratings { get; init; } = Ratings;
     [JsonPropertyName("reviews")]
