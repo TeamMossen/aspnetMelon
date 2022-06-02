@@ -41,6 +41,9 @@ public class ProductController : Controller
         return View(productsViewModel);
     }
 
+    public IActionResult GetReviews(int productId)
+        => ViewComponent("ProductReviews",new { productId});
+
     //public ViewResult List(int categoryId)
     //{
 

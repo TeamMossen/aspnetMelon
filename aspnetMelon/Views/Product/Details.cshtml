@@ -19,7 +19,25 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("ProductReviews",Model.Product.ProductId);
 
-@section Scripts {
+<div id="reviews">
+    <h2>Loading Reviews...</h2>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "@Url.Action("GetReviews","Product")",
+            type: "GET",
+            data: { productId : @Model.Product.ProductId },
+            success: function (result) {
+                $("#reviews").html(result);
+            }
+        });
+    });
+
+</script>
+
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}}
+*@
