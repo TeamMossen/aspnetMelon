@@ -8,8 +8,8 @@ public class CategoryService : ICategoryService
     {
         _appContext = appContext;
     }
-    public CategoryDto? GetCategoryByCategoryId(int categoryId)
-        => _appContext.Categories.Where(c => c.CategoryId == categoryId).Select(c => (CategoryDto)c!).FirstOrDefault();
+    public async Task<CategoryDto?> GetCategoryByCategoryId(int categoryId)
+        => await _appContext.Categories.Where(c => c.CategoryId == categoryId).Select(c => (CategoryDto)c!).FirstOrDefaultAsync();
 
     public async Task<IEnumerable<CategoryDto>> GetAllCategories()
         => await _appContext.Categories.Select(c => (CategoryDto)c!).ToListAsync();

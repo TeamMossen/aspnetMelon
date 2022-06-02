@@ -2,7 +2,7 @@
 
 public interface ICategoryService
 {
-    CategoryDto? GetCategoryByCategoryId(int categoryId);
+    Task<CategoryDto?> GetCategoryByCategoryId(int categoryId);
 
     Task<IEnumerable<CategoryDto>> GetAllCategories();
 

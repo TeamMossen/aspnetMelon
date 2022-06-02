@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Admin\Views\Products\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\ProductReviews\Default.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Product\Products.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
@@ -51,6 +52,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Admin\Views\Products\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Components\ProductReviews\Default.cshtml" />
   </ItemGroup>
 
 </Project>

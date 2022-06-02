@@ -6,38 +6,38 @@ public class ProductController : Controller
 {
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
-    private readonly IProductReviewService _productReviewService;
+    //private readonly IProductReviewService _productReviewService;
 
-    public ProductController(IProductService productService, ICategoryService categoryService, IProductReviewService productReviewService)
+    public ProductController(IProductService productService, ICategoryService categoryService/*, IProductReviewService productReviewService*/)
     {
         _productService = productService;
         _categoryService = categoryService;
-        _productReviewService = productReviewService;
+        //_productReviewService = productReviewService;
     }
 
     public async Task<IActionResult> Details(int id)
     {
-        var product = _productService.GetProductById(id);
+        var product = await _productService.GetProductById(id);
         if (product is null)
             return NotFound();
 
-        var productReviews = await _productReviewService.GetReviews(id);
-        var productDetailViewModel = new ProductDetailViewModel { Product = product, ProductReviews = productReviews };
+        //var productReviews = await _productReviewService.GetReviews(id);
+        var productDetailViewModel = new ProductDetailViewModel { Product = product/*, ProductReviews = productReviews*/ };
         return View(productDetailViewModel);
     }
 
-    public IActionResult Products(int? categoryId = null)
+    public async Task<IActionResult> Products(int? categoryId = null)
     {
         var productsViewModel = new ProductsViewModel();
         if (categoryId is not null)
         {
-            productsViewModel.CurrentCategory = _categoryService.GetCategoryByCategoryId(categoryId.Value)?.CategoryName ?? productsViewModel.CurrentCategory;
-            productsViewModel.Products = _productService.GetProductsByCategory(categoryId.Value);
+            productsViewModel.CurrentCategory = _categoryService.GetCategoryByCategoryId(categoryId.Value).Result?.CategoryName ?? productsViewModel.CurrentCategory;
+            productsViewModel.Products = await _productService.GetProductsByCategory(categoryId.Value);
 
             return productsViewModel.Products.Any() ? View(productsViewModel) : RedirectToAction(nameof(Products));
         }
 
-        productsViewModel.Products = _productService.GetProducts(1, 20).Result;
+        productsViewModel.Products = await _productService.GetProducts(1, 20);
         return View(productsViewModel);
     }
 
