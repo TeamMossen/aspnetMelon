@@ -1,4 +1,4 @@
-﻿namespace Service;
+﻿namespace Infrastructure;
 
 public class PageParameters
 {

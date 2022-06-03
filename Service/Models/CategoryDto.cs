@@ -1,4 +1,4 @@
-﻿namespace Service.Models;
+﻿namespace Infrastructure.Models;
 
 public record CategoryDto(int CategoryId, string CategoryName, string CategoryDescription, ICollection<ProductDto>? Products = null)
 {

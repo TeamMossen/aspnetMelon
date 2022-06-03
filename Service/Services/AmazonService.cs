@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
-using System.IO.Compression;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
+using Infrastructure.Models;
+using Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 
-namespace Service.Services;
+namespace Infrastructure.Services;
 
 public class AmazonService : IProductReviewService
 {

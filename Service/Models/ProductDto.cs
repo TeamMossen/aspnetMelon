@@ -1,4 +1,4 @@
-﻿namespace Service.Models;
+﻿namespace Infrastructure.Models;
 
 public record ProductDto
 (int ProductId, string Name, string Description, decimal Price,

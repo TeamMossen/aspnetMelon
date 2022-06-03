@@ -1,6 +1,6 @@
-﻿using aspnetMelon.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Infrastructure.Services.Interfaces;
 
 namespace aspnetMelon.Controllers;
 public class HomeController : Controller

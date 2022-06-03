@@ -1,4 +1,7 @@
-﻿namespace Service.Services;
+﻿using Infrastructure.Models;
+using Infrastructure.Services.Interfaces;
+
+namespace Infrastructure.Services;
 
 public class ProductService : IProductService
 {

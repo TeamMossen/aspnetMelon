@@ -1,4 +1,4 @@
-﻿namespace Service.Services.Interfaces;
+﻿namespace Infrastructure.Services.Interfaces;
 
 public interface IUserService
 {

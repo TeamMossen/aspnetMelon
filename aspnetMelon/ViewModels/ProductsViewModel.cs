@@ -1,4 +1,6 @@
-﻿namespace aspnetMelon.ViewModels;
+﻿using Infrastructure.Models;
+
+namespace aspnetMelon.ViewModels;
 
 public class ProductsViewModel
 {

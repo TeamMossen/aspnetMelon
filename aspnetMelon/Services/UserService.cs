@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Models;
+using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace Service.Services;
+namespace aspnetMelon.Services;
 
 public class UserService : IUserService
 {

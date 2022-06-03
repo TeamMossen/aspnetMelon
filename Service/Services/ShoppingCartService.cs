@@ -1,4 +1,6 @@
-﻿namespace Service.Services;
+﻿using Infrastructure.Services.Interfaces;
+
+namespace Infrastructure.Services;
 
 public class ShoppingCartService : IShoppingCartService
 {

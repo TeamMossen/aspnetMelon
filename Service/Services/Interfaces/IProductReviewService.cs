@@ -1,4 +1,6 @@
-﻿namespace Service.Services.Interfaces;
+﻿using Infrastructure.Models;
+
+namespace Infrastructure.Services.Interfaces;
 
 public interface IProductReviewService
 {
