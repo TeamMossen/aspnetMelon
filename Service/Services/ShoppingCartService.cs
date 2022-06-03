@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services.Interfaces;
+﻿using Domain.Models.Identity;
+using Infrastructure.Services.Interfaces;
 
 namespace Infrastructure.Services;
 
@@ -6,12 +7,12 @@ public class ShoppingCartService : IShoppingCartService
 {
     private readonly AppDbContext _appContext;
 
-    private readonly IUserService _userService;
+    private readonly ICurrentUserService _userService;
 
     private readonly AppUser _user;
     //private readonly ISession _session;
 
-    public ShoppingCartService(AppDbContext appContext, IUserService userService)
+    public ShoppingCartService(AppDbContext appContext, ICurrentUserService userService)
     {
         _appContext = appContext;
         _userService = userService;

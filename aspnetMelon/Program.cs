@@ -1,12 +1,12 @@
 global using aspnetMelon.ViewModels;
 using Domain;
-using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using aspnetMelon.Services;
 using Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
+using Domain.Models.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 // connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -36,7 +36,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
 
 #endregion
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();

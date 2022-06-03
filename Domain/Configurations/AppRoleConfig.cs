@@ -1,4 +1,6 @@
-﻿namespace Domain.Configurations;
+﻿using Domain.Models.Identity;
+
+namespace Domain.Configurations;
 
 public class AppRoleConfig : IEntityTypeConfiguration<AppRole>
 {

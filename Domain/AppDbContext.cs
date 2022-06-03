@@ -4,7 +4,7 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
+using Domain.Models.Identity;
 
 namespace Domain;
 

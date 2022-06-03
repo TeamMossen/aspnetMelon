@@ -1,11 +1,14 @@
 using aspnetMelon.MinimalApi;
 using aspnetMelon.MinimalApi.EndpointDefinitions;
+using aspnetMelon.MinimalApi.Services;
+using Infrastructure.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDomainServices(builder.Configuration);
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
