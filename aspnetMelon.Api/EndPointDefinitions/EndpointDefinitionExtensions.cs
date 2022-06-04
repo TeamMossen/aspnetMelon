@@ -14,10 +14,10 @@ public static class EndpointDefinitionExtensions
                     .Select(Activator.CreateInstance).Cast<IEndpointDefinition>());
         }
 
-        foreach (var endpointDefinition in endpointDefinitions)
-        {
-            endpointDefinition.DefineServices(services);
-        }
+        //foreach (var endpointDefinition in endpointDefinitions)
+        //{
+        //    endpointDefinition.DefineServices(services);
+        //}
 
         services.AddSingleton(endpointDefinitions as IReadOnlyCollection<IEndpointDefinition>);
     }

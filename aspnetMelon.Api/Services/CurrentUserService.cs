@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Models.Identity;
 using Infrastructure.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace aspnetMelon.MinimalApi.Services
 {
@@ -14,7 +15,7 @@ namespace aspnetMelon.MinimalApi.Services
         }
         public async Task<AppUser> GetCurrentUser()
         {
-            return await _appContext.Users.FindAsync(1);
+            return await _appContext.Users.SingleAsync(u => u.ApiKey == "");
         }
     }
 }

@@ -25,13 +25,14 @@ public class RegisterModel : PageModel
     private readonly IUserEmailStore<AppUser> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
+    private readonly RoleManager<AppRole> _roleManager;
 
     public RegisterModel(
         UserManager<AppUser> userManager,
         IUserStore<AppUser> userStore,
         SignInManager<AppUser> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender, RoleManager<AppRole> roleManager)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -39,6 +40,7 @@ public class RegisterModel : PageModel
         _signInManager = signInManager;
         _logger = logger;
         _emailSender = emailSender;
+        _roleManager = roleManager;
     }
 
     /// <summary>
@@ -121,7 +123,13 @@ public class RegisterModel : PageModel
 
             if (result.Succeeded)
             {
+                var role = _roleManager.FindByNameAsync("User").Result;
+                if (role != null)
+                {
+                    await _userManager.AddToRoleAsync(user, role.Name);
+                }
                 _logger.LogInformation("User created a new account with password.");
+
 
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

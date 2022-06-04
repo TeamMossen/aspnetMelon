@@ -15,4 +15,9 @@
     <ProjectReference Include="..\Service\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
 </Project>
