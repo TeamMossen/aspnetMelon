@@ -1,4 +1,6 @@
-﻿namespace aspnetMelon.MinimalApi.EndpointDefinitions;
+﻿using Infrastructure.Services.Interfaces;
+
+namespace aspnetMelon.MinimalApi.EndpointDefinitions;
 
 public interface IEndpointDefinition
 {

@@ -1,6 +1,7 @@
 using aspnetMelon.MinimalApi;
 using aspnetMelon.MinimalApi.EndpointDefinitions;
 using aspnetMelon.MinimalApi.Services;
+using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
