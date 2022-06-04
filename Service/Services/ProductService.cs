@@ -25,10 +25,9 @@ public class ProductService : IProductService
     public async Task<bool> Delete(int id) 
         => await _appContext.Products.DeleteByKeyAsync(id) > 0;
 
-    public async Task<IEnumerable<ProductDto>> GetProducts(int page, int pageSize)
+    public async Task<IEnumerable<ProductDto>> GetProducts(int page = 1, int pageSize = 20)
     {
         var pageParameters = new PageParameters(page, pageSize);
-
         return await _appContext.Products.Include(p => p.Category).Select(p => (ProductDto)p!)
             .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
             .Take(pageParameters.PageSize).ToListAsync();
@@ -36,8 +35,18 @@ public class ProductService : IProductService
 
     public async Task<IEnumerable<ProductDto>> GetProductsByCategory(int categoryId) 
         => await _appContext.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).Select(p => (ProductDto)p!).ToArrayAsync();
-    public async Task<IEnumerable<ProductDto>> GetProductsOnSale() 
-        => await _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p!).ToArrayAsync();
+    public async Task<IEnumerable<ProductDto>> GetProductsOnSale(int page, int pageSize)
+    {
+        var pageParameters = new PageParameters(page, pageSize);
+        return await _appContext.Products
+            .Where(p => p.IsOnSale)
+            .Include(p => p.Category)
+            .Select(p => (ProductDto)p!)
+            .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+            .Take(pageParameters.PageSize).ToListAsync();
+
+    }
+    //=> await _appContext.Products.Where(p => p.IsOnSale).Include(p => p.Category).Select(p => (ProductDto)p!).ToArrayAsync();
 
     public async Task<ProductDto?> GetProductById(int id)
         => await _appContext.Products.FindAsync(id);
