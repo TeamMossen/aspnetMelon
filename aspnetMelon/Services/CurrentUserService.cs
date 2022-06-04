@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Models.Identity;
+using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace Service.Services;
+namespace aspnetMelon.Services;
 
-public class UserService : IUserService
+public class CurrentUserService : ICurrentUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<AppUser> _userManager;
 
-    public UserService(IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
+    public CurrentUserService(IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
     {
         _httpContextAccessor = httpContextAccessor;
         _userManager = userManager;

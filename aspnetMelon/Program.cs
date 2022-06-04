@@ -1,13 +1,12 @@
-global using Service.Services.Interfaces;
-global using Service.Models;
 global using aspnetMelon.ViewModels;
-using Service.Services;
 using Domain;
-using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
+using aspnetMelon.Services;
+using Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
+using Domain.Models.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 // connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -18,10 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 //    .AddEntityFrameworkStores<AppDbContext>();;
 
 #region Identity and DbContext Services
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDomainServices(builder.Configuration);
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -39,23 +36,8 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
 
 #endregion
 
-#region Services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-
-builder.Services.AddHttpClient<IProductReviewService, AmazonService>(c =>
-    {
-        c.BaseAddress = new Uri("https://data.unwrangle.com/api/");
-        c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    })
-    .ConfigurePrimaryHttpMessageHandler(config => new HttpClientHandler
-    {
-        AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
-    });
-#endregion
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();

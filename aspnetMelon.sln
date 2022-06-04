@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetMelon", "aspnetMelon\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{37C17E57-FC41-4475-917F-A03E23CC9143}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{D969B6C2-AF7A-4FB4-831B-8FBF3D886BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Service\Infrastructure.csproj", "{D969B6C2-AF7A-4FB4-831B-8FBF3D886BEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{F04E8E24-C566-43C3-B2C8-6A4E14150F04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetMelon.MinimalApi", "aspnetMelon.Api\aspnetMelon.MinimalApi.csproj", "{8B069277-ED6F-47CA-89A5-C490E30B43DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{D969B6C2-AF7A-4FB4-831B-8FBF3D886BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D969B6C2-AF7A-4FB4-831B-8FBF3D886BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D969B6C2-AF7A-4FB4-831B-8FBF3D886BEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F04E8E24-C566-43C3-B2C8-6A4E14150F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F04E8E24-C566-43C3-B2C8-6A4E14150F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F04E8E24-C566-43C3-B2C8-6A4E14150F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F04E8E24-C566-43C3-B2C8-6A4E14150F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B069277-ED6F-47CA-89A5-C490E30B43DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B069277-ED6F-47CA-89A5-C490E30B43DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B069277-ED6F-47CA-89A5-C490E30B43DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B069277-ED6F-47CA-89A5-C490E30B43DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-namespace aspnetMelon.Components;
+namespace aspnetMelon.ViewComponents;
 
 public class CategoryMenu : ViewComponent
 {

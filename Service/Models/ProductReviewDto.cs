@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Service.Models;
+namespace Infrastructure.Models;
 
 public record ProductReviewsDto(
     [property: JsonPropertyName("success")] bool Success,

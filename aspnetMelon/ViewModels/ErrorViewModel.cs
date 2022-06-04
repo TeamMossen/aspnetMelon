@@ -1,4 +1,4 @@
-namespace aspnetMelon.Models;
+namespace aspnetMelon.ViewModels;
 
 public class ErrorViewModel
 {

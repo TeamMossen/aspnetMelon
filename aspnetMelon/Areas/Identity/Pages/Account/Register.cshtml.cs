@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Domain.Models.Identity;
+using Infrastructure;
 
 namespace aspnetMelon.Areas.Identity.Pages.Account;
 
@@ -107,7 +109,7 @@ public class RegisterModel : PageModel
         if (ModelState.IsValid)
         {
             var user = CreateUser();
-
+            user.ApiKey = KeyGenerator.Generate();
             user.ShoppingCart = new ShoppingCart
             {
                 ShoppingCartItems = new List<ShoppingCartItem>()/*{new() {Amount = 1,ProductId = 1}}*/
