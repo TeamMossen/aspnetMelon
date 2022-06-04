@@ -7,15 +7,16 @@ namespace aspnetMelon.MinimalApi.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
-        private readonly AppDbContext _appContext;
+        private readonly AppUser _currentUser;
+        //private readonly AppDbContext _appContext;
 
-        public CurrentUserService(AppDbContext appContext)
+        public CurrentUserService(AppUser currentUser)
         {
-            _appContext = appContext;
+            _currentUser = currentUser;
         }
         public async Task<AppUser> GetCurrentUser()
         {
-            return await _appContext.Users.SingleAsync(u => u.ApiKey == "");
+            return await Task.FromResult(_currentUser);
         }
     }
 }
