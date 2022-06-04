@@ -18,7 +18,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         //var test = await _reviewService.GetReviews(5);
-        var homeViewModel = new HomeViewModel { ProductsOnSale = await _productService.GetProductsOnSale() };
+        var homeViewModel = new HomeViewModel { ProductsOnSale = await _productService.GetProductsOnSale(1, 20) };
 
         return View(homeViewModel);
     }
