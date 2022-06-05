@@ -22,7 +22,10 @@ public class AuthMiddleware
         var attribute = endpoint?.Metadata.GetMetadata<ApiKeyAttribute>();
 
         if (attribute is null)
+        {
             await _next(httpContext);
+            return;
+        }
 
 
         if (!httpContext.Request.Headers.TryGetValue(Constants.APIKEYNAME, out var extractedApiKey))
@@ -64,6 +67,7 @@ public class AuthMiddleware
             return;
         }
        
+        //API key auth is User
         await _next(httpContext); // calling next middleware
 
     }
