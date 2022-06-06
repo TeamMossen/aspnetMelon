@@ -42,21 +42,7 @@ public class AuthMiddleware
             return;
         }
         currentUser = user;
-        //userManager.user
-        //var user = await userManager.Users.Where(u => u.ApiKey == extractedApiKey)
-        //    .Include(x => x.UserRoles)
-        //    .ThenInclude(x => x.Role).AsNoTracking().SingleOrDefaultAsync();
 
-
-        //var currentRole = await appDbContext.UserRoles.Where(u => u.UserId == currentUser.Id)
-        //    .Join(appDbContext.Roles, u => u.).ToListAsync();
-
-        //var currentRole = await appDbContext.UserRoles
-        //    .Join(appDbContext.Roles, user => user.RoleId, role => role.Id, (userRole, appRole)
-        //        => new
-        //        {
-        //            userRo
-        //        }).ToListAsync();
         if (attribute is { Role: Role.Administrator } &&
             !userManager.IsInRoleAsync(user, "Administrator").Result)
         {
