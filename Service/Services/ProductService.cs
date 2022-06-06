@@ -35,6 +35,9 @@ public class ProductService : IProductService
 
     public async Task<IEnumerable<ProductDto>> GetProductsByCategory(int categoryId) 
         => await _appContext.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).Select(p => (ProductDto)p!).ToArrayAsync();
+    public async Task<IEnumerable<ProductDto>> GetProductsByCategory(string categoryName)
+        => await _appContext.Products.Where(p => p.Category.CategoryName == categoryName).Include(p => p.Category).Select(p => (ProductDto)p!).ToArrayAsync();
+
     public async Task<IEnumerable<ProductDto>> GetProductsOnSale(int page, int pageSize)
     {
         var pageParameters = new PageParameters(page, pageSize);
