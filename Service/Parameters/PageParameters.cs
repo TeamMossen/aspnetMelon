@@ -1,6 +1,6 @@
-﻿namespace Infrastructure;
+﻿namespace Infrastructure.Parameters;
 
-public class PageParameters
+public class PageParameters : IPageParameters
 {
     private const int MaxPageSize = 20;
     public int PageNumber { get; set; } = 1;

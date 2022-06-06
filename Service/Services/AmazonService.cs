@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Net.Http.Json;
-using Infrastructure.Models;
-using Infrastructure.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Services;

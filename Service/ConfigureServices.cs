@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

@@ -1,22 +1,19 @@
-﻿using Domain;
-using Domain.Models.Identity;
+﻿using Domain.Models.Identity;
 using Infrastructure.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
-namespace aspnetMelon.MinimalApi.Services
+namespace aspnetMelon.MinimalApi.Services;
+
+public class CurrentUserService : ICurrentUserService
 {
-    public class CurrentUserService : ICurrentUserService
-    {
-        private readonly AppUser _currentUser;
-        //private readonly AppDbContext _appContext;
+    private readonly AppUser _currentUser;
+    //private readonly AppDbContext _appContext;
 
-        public CurrentUserService(AppUser currentUser)
-        {
-            _currentUser = currentUser;
-        }
-        public async Task<AppUser> GetCurrentUser()
-        {
-            return await Task.FromResult(_currentUser);
-        }
+    public CurrentUserService(AppUser currentUser)
+    {
+        _currentUser = currentUser;
+    }
+    public async Task<AppUser> GetCurrentUser()
+    {
+        return await Task.FromResult(_currentUser);
     }
 }

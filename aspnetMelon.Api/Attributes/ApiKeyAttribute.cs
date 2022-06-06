@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace aspnetMelon.MinimalApi.Attributes;
+﻿namespace aspnetMelon.MinimalApi.Attributes;
 
 public enum Role { User, Administrator }
 

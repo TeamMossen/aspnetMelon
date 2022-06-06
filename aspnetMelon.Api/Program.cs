@@ -5,8 +5,6 @@ using aspnetMelon.MinimalApi.Services;
 using Domain;
 using Domain.Models.Identity;
 using Infrastructure.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.WebEncoders.Testing;
 using Microsoft.OpenApi.Models;
 using static aspnetMelon.MinimalApi.Constants;
 

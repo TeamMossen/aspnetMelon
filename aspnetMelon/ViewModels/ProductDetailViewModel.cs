@@ -1,10 +1,9 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Models.Dtos;
 
-namespace aspnetMelon.ViewModels
+namespace aspnetMelon.ViewModels;
+
+public class ProductDetailViewModel
 {
-    public class ProductDetailViewModel
-    {
-        public ProductDto Product { get; set; }
-        public ProductReviewsDto ProductReviews { get; set; }
-    }
+    public ProductDto Product { get; set; }
+    public ProductReviewsDto ProductReviews { get; set; }
 }

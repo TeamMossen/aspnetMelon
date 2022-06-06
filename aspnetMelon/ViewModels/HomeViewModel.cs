@@ -1,4 +1,4 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Models.Dtos;
 
 namespace aspnetMelon.ViewModels;
 

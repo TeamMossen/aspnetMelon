@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models;
+﻿namespace Infrastructure.Models.Dtos;
 
 public record CategoryDto(int CategoryId, string CategoryName, string CategoryDescription, ICollection<ProductDto>? Products = null)
 {

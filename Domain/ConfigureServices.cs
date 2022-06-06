@@ -1,7 +1,5 @@
-﻿using System.Net.Http.Headers;
-using Domain;
+﻿using Domain;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

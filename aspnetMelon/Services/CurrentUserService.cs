@@ -1,6 +1,5 @@
 ﻿using Domain.Models.Identity;
 using Infrastructure.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace aspnetMelon.Services;

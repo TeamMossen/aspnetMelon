@@ -1,6 +1,7 @@
-﻿using Infrastructure.Models;
-using Infrastructure.Services;
+﻿using Infrastructure.Models.Dtos;
+using Infrastructure.Parameters;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetMelon.MinimalApi.EndpointDefinitions;
 
@@ -11,16 +12,23 @@ public class ProductEndPoint : IEndpointDefinition
         // GET: PRODUCTS BY PAGE
         app.MapGet("/products", GetProducts);
 
-        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, int page = 1, int pageSize = 20, bool onSale = false)
+        //async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, int page = 1, int pageSize = 20, bool onSale = false)
+        //{
+        //    Func<int, int, Task<IEnumerable<ProductDto>>> GetProducts
+        //    = onSale ? productService.GetProductsOnSale : productService.GetProducts;
+
+        //    if (page == 0 || pageSize == 0)
+        //        return await GetProducts(1, 20);
+        //    return await GetProducts(page, pageSize);
+
+        //}
+
+        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, [FromBody] (SearchParameters searchParameters, PageParameters pageParameters) parameters)
         {
-            Func<int, int, Task<IEnumerable<ProductDto>>> GetProducts
-            = onSale ? productService.GetProductsOnSale : productService.GetProducts;
-
-            if (page == 0 || pageSize == 0)
-                return await GetProducts(1, 20);
-            return await GetProducts(page, pageSize);
-
+            var products = await productService.GetProducts(new PageParameters(1, 20), parameters.searchParameters);
+            return products;
         }
+
         //GET: PRODUCT BY ID
         app.MapGet("/products/{id}", async (IProductService productService, int id) =>
         {

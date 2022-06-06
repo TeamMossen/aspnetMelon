@@ -1,10 +1,8 @@
-﻿using System.Security.Claims;
-using aspnetMelon.MinimalApi.Attributes;
+﻿using aspnetMelon.MinimalApi.Attributes;
 using Domain;
 using Domain.Models.Identity;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace aspnetMelon.MinimalApi.Middleware;
 

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models;
+﻿namespace Infrastructure.Models.Dtos;
 
 public record OrderDetailDto(int OrderDetailId, int OrderId, int ProductId, int Amount, decimal Price, ProductDto? product = null)
 {

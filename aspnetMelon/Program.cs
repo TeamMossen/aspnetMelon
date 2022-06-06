@@ -1,11 +1,7 @@
 global using aspnetMelon.ViewModels;
 using Domain;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Http.Headers;
 using aspnetMelon.Services;
 using Infrastructure.Services.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers;
 using Domain.Models.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
