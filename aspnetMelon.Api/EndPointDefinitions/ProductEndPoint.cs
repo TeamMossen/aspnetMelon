@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Models.Dtos;
-using Infrastructure.Parameters;
+using Infrastructure.Models.Parameters;
+using Infrastructure.Models.Parameters.Interfaces;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,9 +24,9 @@ public class ProductEndPoint : IEndpointDefinition
 
         //}
 
-        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, [FromBody] (SearchParameters searchParameters, PageParameters pageParameters) parameters)
+        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, int page, int pageSize, [FromBody]ISearchParameters searchParameters)
         {
-            var products = await productService.GetProducts(new PageParameters(1, 20), parameters.searchParameters);
+            var products = await productService.GetProducts(new PageParameters(page, pageSize), searchParameters);
             return products;
         }
 

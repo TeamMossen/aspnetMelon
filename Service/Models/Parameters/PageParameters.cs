@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Parameters;
+﻿using Infrastructure.Models.Parameters.Interfaces;
+
+namespace Infrastructure.Models.Parameters;
 
 public class PageParameters : IPageParameters
 {

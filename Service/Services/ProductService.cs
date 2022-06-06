@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Builders;
-using Infrastructure.Parameters;
+using Infrastructure.Models.Parameters;
+using Infrastructure.Models.Parameters.Interfaces;
 
 namespace Infrastructure.Services;
 
@@ -35,7 +36,7 @@ public class ProductService : IProductService
 
     public async Task<IEnumerable<ProductDto>> GetProducts(IPageParameters pageParameters, ISearchParameters searchParameters)
     {
-        var searchQuery = new SearchBuilder()
+        var searchQuery = new ProductSearchBuilder()
             .SetSearchStream(searchParameters.SearchTerm)
             .SetCategory(searchParameters.CategoryName)
             .SetIsInStock(searchParameters.IsInStock)

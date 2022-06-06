@@ -1,45 +1,46 @@
 ﻿using Infrastructure.Builders.Interfaces;
-using Infrastructure.Parameters;
 using LinqKit;
 using System.Linq.Expressions;
+using Infrastructure.Models.Parameters;
+using Infrastructure.Models.Parameters.Interfaces;
 
 namespace Infrastructure.Builders;
 
-public class SearchBuilder : ISearchBuilder
+public class ProductSearchBuilder : IProductSearchBuilder
 {
     private readonly ISearchParameters _searchParameters;
-    public SearchBuilder() : this(new SearchParameters()) { }
-    public SearchBuilder(ISearchParameters searchParameters)
+    public ProductSearchBuilder() : this(new ProductParameters()) { }
+    public ProductSearchBuilder(ISearchParameters searchParameters)
     {
         _searchParameters = searchParameters;
     }
-    public SearchBuilder SetSearchStream(string searchTerm)
+    public ProductSearchBuilder SetSearchStream(string searchTerm)
     {
         _searchParameters.SearchTerm = searchTerm;
         return this;
     }
 
-    public SearchBuilder SetIsOnSale(bool onSale)
+    public ProductSearchBuilder SetIsOnSale(bool onSale)
     {
         _searchParameters.IsOnSale = onSale;
         return this;
     }
-    public SearchBuilder SetIsInStock(bool inStock)
+    public ProductSearchBuilder SetIsInStock(bool inStock)
     {
         _searchParameters.IsInStock = inStock;
         return this;
     }
-    public SearchBuilder SetCategory(string categoryName)
+    public ProductSearchBuilder SetCategory(string categoryName)
     {
         _searchParameters.CategoryName = categoryName;
         return this;
     }
-    public SearchBuilder SetMinPrice(decimal minPrice)
+    public ProductSearchBuilder SetMinPrice(decimal minPrice)
     {
         _searchParameters.MinPrice = minPrice;
         return this;
     }
-    public SearchBuilder SetMaxPrice(decimal maxPrice)
+    public ProductSearchBuilder SetMaxPrice(decimal maxPrice)
     {
         _searchParameters.MaxPrice = maxPrice;
         return this;

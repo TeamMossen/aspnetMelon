@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Parameters.Interfaces;
+﻿namespace Infrastructure.Models.Parameters.Interfaces;
 
 public interface ISearchParameters
 {
