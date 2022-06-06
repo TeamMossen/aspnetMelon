@@ -21,7 +21,6 @@ public class ProductEndPoint : IEndpointDefinition
             return await GetProducts(page, pageSize);
 
         }
-
         //GET: PRODUCT BY ID
         app.MapGet("/products/{id}", async (IProductService productService, int id) =>
         {
@@ -33,6 +32,12 @@ public class ProductEndPoint : IEndpointDefinition
         {
             var success = await productService.AddOrUpdate(product);
             return success ? Results.Ok(product) : Results.BadRequest();
+        });
+        //DELETE: DELETES PRODUCT BY ID
+        app.MapDelete("/products/{id}", async (IProductService ProductService, int id) =>
+        {
+            var success = await ProductService.Delete(id);
+            return success ? Results.Ok() : Results.BadRequest();
         });
     }
 
