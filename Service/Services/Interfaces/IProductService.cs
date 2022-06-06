@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Services.Interfaces;
+﻿using Infrastructure.Models.Parameters.Interfaces;
+
+namespace Infrastructure.Services.Interfaces;
 
 public interface IProductService
 {

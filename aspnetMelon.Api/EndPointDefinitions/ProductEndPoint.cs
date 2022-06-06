@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Models.Dtos;
-using Infrastructure.Parameters;
+using Infrastructure.Models.Parameters;
+using Infrastructure.Models.Parameters.Interfaces;
 using Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +11,12 @@ public class ProductEndPoint : IEndpointDefinition
     public void DefineEndpoints(WebApplication app)
     {
         // GET: PRODUCTS BY PAGE
-        app.MapGet("/products", GetProducts);
+        app.MapGet("/products", 
+            async(IProductService productService, int page, int pageSize, [FromBody]ISearchParameters searchParameters) =>
+        {
+            var products = await productService.GetProducts(new PageParameters(page, pageSize), searchParameters);
+            return products;
+        });
 
         //async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, int page = 1, int pageSize = 20, bool onSale = false)
         //{
@@ -22,12 +28,6 @@ public class ProductEndPoint : IEndpointDefinition
         //    return await GetProducts(page, pageSize);
 
         //}
-
-        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, [FromBody] (SearchParameters searchParameters, PageParameters pageParameters) parameters)
-        {
-            var products = await productService.GetProducts(new PageParameters(1, 20), parameters.searchParameters);
-            return products;
-        }
 
         //GET: PRODUCT BY ID
         app.MapGet("/products/{id}", async (IProductService productService, int id) =>
@@ -49,8 +49,4 @@ public class ProductEndPoint : IEndpointDefinition
         });
     }
 
-    public void DefineServices(IServiceCollection services)
-    {
-        
-    }
 }

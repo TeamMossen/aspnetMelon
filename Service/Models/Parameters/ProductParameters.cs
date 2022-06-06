@@ -1,6 +1,8 @@
-﻿namespace Infrastructure.Parameters;
+﻿using Infrastructure.Models.Parameters.Interfaces;
 
-public class SearchParameters : ISearchParameters
+namespace Infrastructure.Models.Parameters;
+
+public class ProductParameters : ISearchParameters
 {
     public string SearchTerm { get; set; } = default!;
     public bool IsOnSale { get; set; } = false;
