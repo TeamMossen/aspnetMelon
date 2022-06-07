@@ -12,13 +12,15 @@ public class ProductEndPoint : IEndpointDefinition
 {
     public void DefineEndpoints(WebApplication app)
     {
-        // GET: PRODUCTS BY PAGE
-        app.MapGet("/products",
-            async Task<IEnumerable<ProductDto>> (IProductService productService, /*int page, int pageSize,*/ ProductParameters searchParameters) =>
+        // GET: PRODUCTS BY PAGE AND QUERY
+        app.MapGet("/products", GetProducts);
+
+        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, ProductParameters searchParameters, int? page, int? pageSize)
         {
-            var products = await productService.GetProducts(new PageParameters(1, 20), searchParameters);
+            var products = await productService.GetProducts(new PageParameters(page ?? 1, pageSize ?? 20), searchParameters);
             return products;
-        });
+
+        }
         //app.MapGet("/products",
         //    async (IProductService productService, int page, int pageSize, ProductParameters searchParameters) =>
         //    {

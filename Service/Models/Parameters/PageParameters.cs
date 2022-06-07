@@ -1,4 +1,6 @@
-﻿using Infrastructure.Models.Parameters.Interfaces;
+﻿using System.Reflection;
+using Infrastructure.Models.Parameters.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Models.Parameters;
 
@@ -19,4 +21,15 @@ public class PageParameters : IPageParameters
         get => _pageSize;
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
     }
+
+    public static ValueTask<PageParameters?> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    {
+        int.TryParse(httpContext.Request.Query["page"], out var page);
+        int.TryParse(httpContext.Request.Query["page-size"], out var pageSize);
+
+        return ValueTask.FromResult<PageParameters?>(
+            new PageParameters(page, pageSize)
+        );
+    }
+
 }
