@@ -5,12 +5,10 @@ namespace aspnetMelon.Controllers;
 
 public class ShoppingCartController : Controller
 {
-    private readonly IProductService _productService;
     private readonly IShoppingCartService _shoppingCartService;
 
-    public ShoppingCartController(IProductService productService, IShoppingCartService shoppingCartService)
+    public ShoppingCartController(IShoppingCartService shoppingCartService)
     {
-        _productService = productService;
         _shoppingCartService = shoppingCartService;
     }
 

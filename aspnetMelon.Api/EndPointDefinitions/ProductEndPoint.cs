@@ -2,7 +2,9 @@
 using Infrastructure.Models.Parameters;
 using Infrastructure.Models.Parameters.Interfaces;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using MinimalApis.Extensions.Binding;
 
 namespace aspnetMelon.MinimalApi.EndpointDefinitions;
 
@@ -11,12 +13,18 @@ public class ProductEndPoint : IEndpointDefinition
     public void DefineEndpoints(WebApplication app)
     {
         // GET: PRODUCTS BY PAGE
-        app.MapGet("/products", 
-            async(IProductService productService, int page, int pageSize, [FromBody]ISearchParameters searchParameters) =>
+        app.MapGet("/products",
+            async Task<IEnumerable<ProductDto>> (IProductService productService, /*int page, int pageSize,*/ ProductParameters searchParameters) =>
         {
-            var products = await productService.GetProducts(new PageParameters(page, pageSize), searchParameters);
+            var products = await productService.GetProducts(new PageParameters(1, 20), searchParameters);
             return products;
         });
+        //app.MapGet("/products",
+        //    async (IProductService productService, int page, int pageSize, ProductParameters searchParameters) =>
+        //    {
+        //        var products = await productService.GetProducts(new PageParameters(page, pageSize), searchParameters);
+        //        return products;
+        //    });
 
         //async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, int page = 1, int pageSize = 20, bool onSale = false)
         //{

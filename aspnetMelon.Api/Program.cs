@@ -20,7 +20,9 @@ builder.Services.AddScoped<AppUser>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsMetadataProviderApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition(APIKEYNAME, new OpenApiSecurityScheme()
