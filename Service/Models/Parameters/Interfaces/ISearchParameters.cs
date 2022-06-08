@@ -8,5 +8,4 @@ public interface ISearchParameters
     string CategoryName { get; set; }
     decimal MinPrice { get; set; }
     decimal MaxPrice { get; set; }
-
 }

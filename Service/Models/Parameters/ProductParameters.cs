@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Models.Parameters;
 
-public class ProductParameters : ISearchParameters
+public class ProductParameters : ISearchParameters, IExtensionBinder<ProductParameters>
 {
     public string SearchTerm { get; set; } = default!;
     public bool IsOnSale { get; set; } = false;

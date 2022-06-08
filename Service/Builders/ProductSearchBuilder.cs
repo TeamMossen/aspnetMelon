@@ -71,7 +71,13 @@ public class ProductSearchBuilder : IProductSearchBuilder
         if (_searchParameters.IsOnSale)
         {
             predicate = predicate.And(
-                e => e.IsOnSale);
+                e => e.IsOnSale == _searchParameters.IsOnSale);
+        }
+        // Category
+        if (!string.IsNullOrEmpty(_searchParameters.CategoryName))
+        {
+            predicate = predicate.And(
+                e => e.Category.CategoryName == _searchParameters.CategoryName);
         }
         return predicate;
     }

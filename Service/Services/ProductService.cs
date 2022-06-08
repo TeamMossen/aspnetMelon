@@ -46,6 +46,7 @@ public class ProductService : IProductService
             .Build();
 
         return await _appContext.Products
+            .Include(p => p.Category)
             .Where(searchQuery)
             .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
             .Take(pageParameters.PageSize)

@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Models.Parameters;
 
-public class PageParameters : IPageParameters
+public class PageParameters : IPageParameters, IExtensionBinder<PageParameters>
 {
     private const int MaxPageSize = 20;
-    public int PageNumber { get; set; } = 1;
+    private int _pageNumber;
     private int _pageSize = 10;
 
     public PageParameters(int page, int pageSize)
@@ -20,6 +20,12 @@ public class PageParameters : IPageParameters
     {
         get => _pageSize;
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+    }
+
+    public int PageNumber
+    {
+        get => _pageNumber;
+        set => _pageNumber = (value == 0) ? 1 : value;
     }
 
     public static ValueTask<PageParameters?> BindAsync(HttpContext httpContext, ParameterInfo parameter)

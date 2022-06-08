@@ -15,9 +15,9 @@ public class ProductEndPoint : IEndpointDefinition
         // GET: PRODUCTS BY PAGE AND QUERY
         app.MapGet("/products", GetProducts);
 
-        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, ProductParameters searchParameters, int? page, int? pageSize)
+        async Task<IEnumerable<ProductDto>> GetProducts(IProductService productService, ProductParameters searchParameters, PageParameters pageParameters)
         {
-            var products = await productService.GetProducts(new PageParameters(page ?? 1, pageSize ?? 20), searchParameters);
+            var products = await productService.GetProducts(pageParameters, searchParameters);
             return products;
 
         }
