@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-aspnetMelon-5761FCF3-C26B-490A-AD46-61BCA46A756F</UserSecretsId>
+	  <EnablePreviewFeatures>True</EnablePreviewFeatures>
+	  <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

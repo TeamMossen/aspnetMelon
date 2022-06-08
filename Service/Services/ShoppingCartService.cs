@@ -36,15 +36,18 @@ public class ShoppingCartService : IShoppingCartService
 
     public List<ShoppingCartItem> GetShoppingCartItems()
     {
-        _user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
-            .Where(s => s.ShoppingCartId == _user.ShoppingCartId).Include(s => s.Product).ToList();
+        //_user.ShoppingCart.ShoppingCartItems = 
+          var items = _appContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == _user.ShoppingCartId)
+            .Include(s => s.Product)
+            .ToList();
+          _user.ShoppingCart.ShoppingCartItems = items;
+          return items;
 
-        return _user.ShoppingCart.ShoppingCartItems!.ToList();
-
-        //_shoppingCart.ShoppingCartItems.ToList();
-        //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
-        //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
-        //                                          (s => s.ProductId));
+          //_shoppingCart.ShoppingCartItems.ToList();
+          //?? (_shoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems.Where
+          //                                          (c => c.ShoppingCartId == _shoppingCart.ShoppingCartId).Include
+          //                                          (s => s.ProductId));
     }
     public void AddToCart(int productId, int amount)
     {

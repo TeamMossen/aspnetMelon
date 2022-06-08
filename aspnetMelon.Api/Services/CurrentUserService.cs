@@ -16,6 +16,10 @@ public class CurrentUserService : ICurrentUserService
         _httpContextAccessor = httpContextAccessor;
         _userManager = userManager;
     }
-    public async Task<AppUser> GetCurrentUser() 
-        => await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
+
+    public async Task<AppUser> GetCurrentUser()
+    {
+        var user = (AppUser)_httpContextAccessor.HttpContext?.Items["User"];
+        return await Task.FromResult(user);
+    }
 }

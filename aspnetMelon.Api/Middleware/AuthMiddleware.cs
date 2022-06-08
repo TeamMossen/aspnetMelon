@@ -43,7 +43,8 @@ public class AuthMiddleware
             return;
         }
 
-        await signInManager.SignInAsync(user, false);
+        httpContext.Items.Add("User", user);
+        //await signInManager.SignInAsync(user, false);
         //httpContext.User.AddIdentity(await signInManager.SignInAsync(user, false)); ;
         //var userClaims = await userManager.GetClaimsAsync(user);
 
