@@ -23,11 +23,11 @@ public class ProductsController : Controller
             Products = await _productService.GetProducts(1, 20)
         });
     }
-    public IActionResult AddOrEdit(int? id)
+    public async Task<IActionResult> AddOrEdit(int? id)
     {
         if (id is null)
             return View();
-        var product = _productService.GetProductById(id.Value);
+        var product = await _productService.GetProductById(id.Value);
 
         return product is not null ? View(product) : NotFound($"No product with id:{id} found");
     }
