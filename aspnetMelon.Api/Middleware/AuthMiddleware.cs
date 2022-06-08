@@ -1,6 +1,7 @@
 ﻿using aspnetMelon.MinimalApi.Attributes;
 using Domain;
 using Domain.Models.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 
@@ -14,7 +15,7 @@ public class AuthMiddleware
     {
         _next = next;
     }
-    public async Task Invoke(HttpContext httpContext, AppDbContext appDbContext, UserManager<AppUser> userManager, AppUser currentUser)
+    public async Task Invoke(HttpContext httpContext, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
     {
         var endpoint = httpContext.Features.Get<IEndpointFeature>()?.Endpoint;
         var attribute = endpoint?.Metadata.GetMetadata<ApiKeyAttribute>();
@@ -41,7 +42,11 @@ public class AuthMiddleware
             await httpContext.Response.WriteAsync("Api Key was not valid");
             return;
         }
-        currentUser = user;
+
+        await signInManager.SignInAsync(user, false);
+        //httpContext.User.AddIdentity(await signInManager.SignInAsync(user, false)); ;
+        //var userClaims = await userManager.GetClaimsAsync(user);
+
 
         if (attribute is { Role: Role.Administrator } &&
             !userManager.IsInRoleAsync(user, "Administrator").Result)

@@ -8,6 +8,7 @@ public class ShoppingCartEndpoint : IEndpointDefinition
     {
         app.MapGet("/shoppingcart", [ApiKey(Role.User)] async (IShoppingCartService shoppingcartService, ICurrentUserService userService) =>
         {
+            var user = userService.GetCurrentUser();
             var cart = shoppingcartService.GetCart();
             return cart.ShoppingCartItems;
         });

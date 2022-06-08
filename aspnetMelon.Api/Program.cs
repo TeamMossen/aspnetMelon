@@ -15,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDomainServices(builder.Configuration);
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
-//builder.Services.AddScoped<UserManager<AppUser>>();
-builder.Services.AddScoped<AppUser>();
+//builder.Services.AddScoped<AppUser>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 

@@ -1,19 +1,21 @@
-﻿using Domain.Models.Identity;
+﻿using System.Security.Claims;
+using Domain.Models.Identity;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace aspnetMelon.MinimalApi.Services;
 
 public class CurrentUserService : ICurrentUserService
 {
-    private readonly AppUser _currentUser;
-    //private readonly AppDbContext _appContext;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly UserManager<AppUser> _userManager;
 
-    public CurrentUserService(AppUser currentUser)
+
+    public CurrentUserService(IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
     {
-        _currentUser = currentUser;
+        _httpContextAccessor = httpContextAccessor;
+        _userManager = userManager;
     }
-    public async Task<AppUser> GetCurrentUser()
-    {
-        return await Task.FromResult(_currentUser);
-    }
+    public async Task<AppUser> GetCurrentUser() 
+        => await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
 }
