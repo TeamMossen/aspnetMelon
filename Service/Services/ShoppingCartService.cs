@@ -21,7 +21,6 @@ public class ShoppingCartService : IShoppingCartService
 
     public ShoppingCart GetCart()
     {
-
         _user.ShoppingCart.ShoppingCartItems = _appContext.ShoppingCartItems
             .Where(s => s.ShoppingCartId == _user.ShoppingCartId).Include(s => s.Product).ToList();
 

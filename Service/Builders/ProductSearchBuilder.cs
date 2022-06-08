@@ -54,12 +54,17 @@ public class ProductSearchBuilder : IProductSearchBuilder
             predicate = predicate.And(
                 e => e.Name.Contains(_searchParameters.SearchTerm));
         }
-        // Price
-        if (_searchParameters.MaxPrice > 0 && _searchParameters.MinPrice > 0)
+        // Max Price
+        if (_searchParameters.MaxPrice > 0)
         {
             predicate = predicate.And(
-                e => e.Price >= _searchParameters.MinPrice
-                     && e.Price <= _searchParameters.MaxPrice);
+                e => e.Price <= _searchParameters.MaxPrice);
+        }
+        // Minimum Price
+        if (_searchParameters.MinPrice > 0)
+        {
+            predicate = predicate.And(
+                e => e.Price >= _searchParameters.MinPrice);
         }
         // In Stock
         if (_searchParameters.IsInStock)
@@ -77,7 +82,7 @@ public class ProductSearchBuilder : IProductSearchBuilder
         if (!string.IsNullOrEmpty(_searchParameters.CategoryName))
         {
             predicate = predicate.And(
-                e => e.Category.CategoryName == _searchParameters.CategoryName);
+                e => e.Category.CategoryName.Contains(_searchParameters.CategoryName));
         }
         return predicate;
     }
