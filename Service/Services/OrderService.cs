@@ -11,7 +11,6 @@ public class OrderService : IOrderService
         _appContext = appContext;
     }
 
-
     public void CreateOrder(OrderDto order)
     {
         List<OrderDetailDto> orderDetails = new List<OrderDetailDto>();
