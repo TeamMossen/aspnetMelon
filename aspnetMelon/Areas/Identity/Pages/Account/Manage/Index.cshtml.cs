@@ -25,6 +25,7 @@ namespace aspnetMelon.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        public string ApiKey { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -67,7 +68,7 @@ namespace aspnetMelon.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-
+            ApiKey = user.ApiKey;
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber
