@@ -1,4 +1,4 @@
-# aspnetMelon Webshop
+# aspnetMelon Web Shop
 
 ## Project Structure
 
