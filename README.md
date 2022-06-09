@@ -1,6 +1,6 @@
 # aspnetMelon Webshop
 
-## Project structure
+## Project Structure
 
 Webshop built with MVC Core
 Minimal Api
@@ -17,12 +17,12 @@ Add this to both projects
 Add this to appsettings.json in the MVC project
 "AmazonApiKey": "{Api key from unwrangle.com}"
 
-## Built with
+## Built With
 
 * MVC Core
 * Minimal Api
 * .Net 6
-* unwrangle.com Api for amazon product reviews
+* unwrangle.com API for Amazon product reviews
 * LinqKit
 * Z.EntityFramework.Extensions
 * Bootstrap
@@ -32,3 +32,7 @@ Add this to appsettings.json in the MVC project
 
 [@Kyemate](https://github.com/Kyemate) 
 
+LIVE: 
+https://melonshoppen.azurewebsites.net/
+LIVE API: 
+https://melonshoppenapi.azurewebsites.net/
